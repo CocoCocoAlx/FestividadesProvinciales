@@ -42,6 +42,6 @@ public class Fiesta{
 
     private String foto;
 
-    // private Predio predio;
+    private Predio predio;
 
 }

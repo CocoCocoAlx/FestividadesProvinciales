@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.polotic.FiestasProvinciales.entidades.Fiesta;
 import com.polotic.FiestasProvinciales.servicios.FiestaServicio;
+import com.polotic.FiestasProvinciales.servicios.PredioServicio;
 
 @RestController
 @RequestMapping("fiestas")
@@ -30,8 +31,8 @@ public class FiestaControlador implements WebMvcConfigurer {
     @Autowired
     FiestaServicio fiestaServicio;
 
-    // @Autowired
-    // PredioServicio predioServicio;
+    @Autowired
+    PredioServicio predioServicio;
 
     @GetMapping
     private ModelAndView inicio()
@@ -52,7 +53,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar festividad");
         maw.addObject("vista", "fiestas/agregar");
-        // maw.addObject("predio", fiestaServicio.mostrarTodos());
+        maw.addObject("predio", fiestaServicio.mostrarTodos());
         return maw;
 
     }
@@ -96,7 +97,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar festividad");
         maw.addObject("vista", "fiestas/editar");
-        // maw.addObject("predio", fiestaServicio.mostrarTodos());
+        maw.addObject("predio", fiestaServicio.mostrarTodos());
 
         if (estaGuardado)
             maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));
@@ -106,7 +107,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         return maw;
     }
 
-    @PutMapping("editar/{id}")
+    @PutMapping("/editar/{id}")
     private ModelAndView actualizar(@PathVariable("id") Long id,
     @RequestParam(value = "archivo", required = false) MultipartFile archivo,
     @Valid Fiesta fiesta, BindingResult br, RedirectAttributes ra)
@@ -121,6 +122,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         registro.setDescripcion(fiesta.getDescripcion());
         registro.setFecha(fiesta.getFecha());
         registro.setEnlace(fiesta.getEnlace());
+        registro.setPredio(fiesta.getPredio());
         ModelAndView maw = this.inicio();
 
         if (! archivo.isEmpty())
@@ -145,7 +147,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         return maw;
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     private ModelAndView borrar(@PathVariable("id") Long id)
     {
         fiestaServicio.borrar(id);
