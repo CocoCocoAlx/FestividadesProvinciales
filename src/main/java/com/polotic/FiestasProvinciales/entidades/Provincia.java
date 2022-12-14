@@ -1,5 +1,7 @@
 package com.polotic.FiestasProvinciales.entidades;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -26,5 +28,16 @@ public class Provincia {
     @NotBlank(message = "Campo obligatorio")
     @Size(max = 250, message= "Nombre demasiado largo")
     private String informacion;
+
+    @OneToMany(mappedBy = "provincia")
+    @JsonManagedReference
+    private List<Localidad> localidades;
+    
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
+
+    
    
 }

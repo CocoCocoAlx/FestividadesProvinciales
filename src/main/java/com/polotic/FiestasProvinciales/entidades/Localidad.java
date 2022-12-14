@@ -1,6 +1,8 @@
 package com.polotic.FiestasProvinciales.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.*;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,7 +13,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Data
 @Builder
-@Table(name="localidad")
+@Table(name="localidades")
 
 public class Localidad {
     @Id
@@ -27,5 +29,10 @@ public class Localidad {
     private String informacion;
 
     private int distancia;
-    
+
+    @ManyToOne
+    @JsonBackReference
+    private Provincia provincias;
+
+
 }

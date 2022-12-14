@@ -1,4 +1,4 @@
-package com.polotic.FiestasProvinciales.entidades;
+package com.polotic.FiestasProvinciales.controladores;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.polotic.FiestasProvinciales.entidades.Fiesta;
 import com.polotic.FiestasProvinciales.servicios.FiestaServicio;
 
 @RestController
@@ -153,3 +154,4 @@ public class FiestaControlador implements WebMvcConfigurer {
         return maw;
     }
 }
+

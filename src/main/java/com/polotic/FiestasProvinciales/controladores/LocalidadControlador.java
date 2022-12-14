@@ -15,73 +15,73 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.polotic.FiestasProvinciales.entidades.Provincia;
-import com.polotic.FiestasProvinciales.servicios.ProvinciaServicio;
+import com.polotic.FiestasProvinciales.entidades.Localidad;
+import com.polotic.FiestasProvinciales.servicios.LocalidadServicio;
 
 @RestController
-@RequestMapping("provincias")
+@RequestMapping("localidades")
 
-public class ProvinciaControlador implements WebMvcConfigurer {
+public class LocalidadControlador implements WebMvcConfigurer {
 
     @Autowired
-    ProvinciaServicio provinciaServicio;
+    LocalidadServicio localidadServicio;
 
     @GetMapping
     private ModelAndView inicio()
     {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Listado de provincias");
-        maw.addObject("vista", "provincias/inicio");
-        maw.addObject("provincia", provinciaServicio.mostrarTodos());
+        maw.addObject("titulo", "Listado de localidades");
+        maw.addObject("vista", "localidad/inicio");
+        maw.addObject("localidad", localidadServicio.mostrarTodos());
         return maw;
 
     }
 
     @GetMapping("/agregar")
-    private ModelAndView agregar(Provincia provincia)
+    private ModelAndView agregar(Localidad localidad)
     {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Agregar provincia");
-        maw.addObject("vista", "provincias/agregar");
+        maw.addObject("titulo", "Agregar localidad");
+        maw.addObject("vista", "localidad/agregar");
         return maw;
 
     }
 
     @PostMapping("/agregar")
     public ModelAndView guardar(@RequestParam("archivo") MultipartFile archivo,
-    @Valid Provincia provincia, BindingResult br, RedirectAttributes ra)
+    @Valid Localidad localidad, BindingResult br, RedirectAttributes ra)
     {
         if (archivo.isEmpty())
             br.reject("archivo", "Por favor, cargar un archivo válido");
 
         if (br.hasErrors()) {
-            return this.agregar(provincia);
+            return this.agregar(localidad);
         }
 
-       provinciaServicio.guardar(provincia);
+        localidadServicio.guardar(localidad);
 
         String tipo = archivo.getContentType();
         String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
         
         ModelAndView maw = this.inicio();   
 
-        provinciaServicio.guardar(provincia);
+        localidadServicio.guardar(localidad);
         maw.addObject("correcto", "El archivo fue cargado exitosamente");
         return maw;
     }
 
     @GetMapping("/editar/{id}")
-    private ModelAndView editar(@PathVariable("id") Long id, Provincia provincia, boolean estaGuardado) {
+    private ModelAndView editar(@PathVariable("id") Long id, Localidad localidad, boolean estaGuardado) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Editar provincia");
-        maw.addObject("vista", "provincia/editar");
+        maw.addObject("titulo", "Editar localidad");
+        maw.addObject("vista", "localidad/editar");
         
 
         if (estaGuardado)
-            maw.addObject("provincia", provinciaServicio.seleccionarPorId(id));
+            maw.addObject("localidad", localidadServicio.seleccionarPorId(id));
 
         return maw;
     }
@@ -89,31 +89,32 @@ public class ProvinciaControlador implements WebMvcConfigurer {
     @PutMapping("editar/{id}")
     private ModelAndView actualizar(@PathVariable("id") Long id,
     @RequestParam(value = "archivo", required = false) MultipartFile archivo,
-    @Valid Provincia provincia, BindingResult br, RedirectAttributes ra)
+    @Valid Localidad localidad, BindingResult br, RedirectAttributes ra)
     {
         if (br.hasErrors())
         {
-        return this.editar(id, provincia, false);
+        return this.editar(id, localidad, false);
         }
 
-        Provincia registro = provinciaServicio.seleccionarPorId(id);
-        registro.setNombre(provincia.getNombre());
-        registro.setInformacion(provincia.getInformacion());
+        Localidad registro = localidadServicio.seleccionarPorId(id);
+        registro.setNombre(localidad.getNombre());
+        registro.setInformacion(localidad.getInformacion());
         ModelAndView maw = this.inicio();
 
         
-        provinciaServicio.guardar(provincia);
-        maw.addObject("correcto","Provincia editada correctamente.");
+        localidadServicio.guardar(localidad);
+        maw.addObject("correcto","localidad editada correctamente.");
         return maw;
     }
 
     @DeleteMapping("/id")
     private ModelAndView borrar(@PathVariable("id") Long id)
     {
-        provinciaServicio.borrar(id);
+        localidadServicio.borrar(id);
         ModelAndView maw = this.inicio();
-        maw.addObject("correcto", "Provincia eliminada correctamente.");
+        maw.addObject("correcto", "localidad eliminada correctamente.");
         return maw;
     }
+    
     
 }
