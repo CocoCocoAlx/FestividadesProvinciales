@@ -1,3 +1,8 @@
+header {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #6aa2e2;
+
+}
 
 
 body {
@@ -60,3 +65,15 @@ body {
 .select2-selection__arrow {
     height: 36px !important;
 }
+
+
+.carousel-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
