@@ -15,18 +15,20 @@ xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/s
         <!-- CSS personalizado -->
         <link href="/src/main/resources/static/css/fiestas.css" rel="stylesheet">
 
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com/" />
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"/>
-
-        <!-- Font Awesome -->
-        <script src="https://kit.fontawesome.com/e81adcd316.js" crossorigin="anonymous"></script>
-
-        <!-- CSS Select2 -->
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-       
+           <!-- Google Fonts -->
+           <link rel="preconnect" href="https://fonts.gstatic.com/" />
+           <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+           <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"/>
+   
+           <!-- Font Awesome -->
+           <script src="https://kit.fontawesome.com/e81adcd316.js" crossorigin="anonymous"></script>
+   
+           <!-- CSS Select2 -->
+           <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+   
+           <!-- CSS DataTables -->
+           <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+   
     </head>
     <body>
         <div id="content" class="container-fluid">
@@ -58,7 +60,9 @@ xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/s
         <!-- Select2 JS -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-       
+        <!-- DataTables JS -->
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
         
         <!-- Script personalizado -->
         <script th:replace="${vista} :: script"></script>
