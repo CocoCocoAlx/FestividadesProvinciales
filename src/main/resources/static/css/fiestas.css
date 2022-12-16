@@ -15,7 +15,19 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
-/* ---------------------------------------------------
+div {
+    width: 80vw;
+    height: 80vh;
+}
+
+img {
+    max-width:100%;
+    height:auto;
+    max-height:100%;
+    align-items: center;
+ }
+ 
+ /* ---------------------------------------------------
                 NAVBAR
 --------------------------------------------------- */
 

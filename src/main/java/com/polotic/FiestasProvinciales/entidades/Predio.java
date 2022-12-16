@@ -20,8 +20,8 @@ public class Predio {
     private String ubicación;
     private int capacidad;
 
-   //  @OneToMany(mappedBy = "predio")
-   //  private List<Fiesta> fiestas;
+    @OneToMany(mappedBy = "predio")
+    private List<Fiesta> fiestas;
     
     @Override
      public String toString(){
