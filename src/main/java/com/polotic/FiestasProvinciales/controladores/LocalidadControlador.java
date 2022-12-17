@@ -45,26 +45,21 @@ public class LocalidadControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar localidad");
         maw.addObject("vista", "localidad/agregar");
+        maw.addObject("provincia", localidadServicio.mostrarTodos());
         return maw;
 
     }
 
     @PostMapping("/agregar")
-    public ModelAndView guardar(@RequestParam("archivo") MultipartFile archivo,
-    @Valid Localidad localidad, BindingResult br, RedirectAttributes ra)
+    public ModelAndView guardar(@Valid Localidad localidad, BindingResult br, RedirectAttributes ra)
     {
-        if (archivo.isEmpty())
-            br.reject("archivo", "Por favor, cargar un archivo válido");
-
+        
         if (br.hasErrors()) {
-            return this.agregar(localidad);
+        return this.agregar(localidad);
         }
 
         localidadServicio.guardar(localidad);
 
-        String tipo = archivo.getContentType();
-        String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
-        
         ModelAndView maw = this.inicio();   
 
         localidadServicio.guardar(localidad);
@@ -88,14 +83,11 @@ public class LocalidadControlador implements WebMvcConfigurer {
 
     @PutMapping("editar/{id}")
     private ModelAndView actualizar(@PathVariable("id") Long id,
-    @RequestParam(value = "archivo", required = false) MultipartFile archivo,
     @Valid Localidad localidad, BindingResult br, RedirectAttributes ra)
     {
         if (br.hasErrors())
         {
-        return this.editar(id, localidad, false);
-        }
-
+        
         Localidad registro = localidadServicio.seleccionarPorId(id);
         registro.setNombre(localidad.getNombre());
         registro.setInformacion(localidad.getInformacion());

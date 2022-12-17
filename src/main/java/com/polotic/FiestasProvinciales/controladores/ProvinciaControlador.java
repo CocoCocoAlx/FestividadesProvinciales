@@ -34,6 +34,7 @@ public class ProvinciaControlador implements WebMvcConfigurer {
         maw.addObject("titulo", "Listado de provincias");
         maw.addObject("vista", "provincias/inicio");
         maw.addObject("provincia", provinciaServicio.mostrarTodos());
+        
         return maw;
 
     }
@@ -45,26 +46,22 @@ public class ProvinciaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar provincia");
         maw.addObject("vista", "provincias/agregar");
+        maw.addObject("localidad", provinciaServicio.mostrarTodos());
+        maw.addObject("fiesta", provinciaServicio.mostrarTodos());
         return maw;
 
     }
 
     @PostMapping("/agregar")
-    public ModelAndView guardar(@RequestParam("archivo") MultipartFile archivo,
-    @Valid Provincia provincia, BindingResult br, RedirectAttributes ra)
+    public ModelAndView guardar(@Valid Provincia provincia, BindingResult br, RedirectAttributes ra)
     {
-        if (archivo.isEmpty())
-            br.reject("archivo", "Por favor, cargar un archivo válido");
-
+        
         if (br.hasErrors()) {
             return this.agregar(provincia);
         }
 
        provinciaServicio.guardar(provincia);
-
-        String tipo = archivo.getContentType();
-        String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
-        
+      
         ModelAndView maw = this.inicio();   
 
         provinciaServicio.guardar(provincia);
@@ -86,14 +83,19 @@ public class ProvinciaControlador implements WebMvcConfigurer {
         return maw;
     }
 
-    @PutMapping("editar/{id}")
+    @PutMapping("/editar/{id}")
     private ModelAndView actualizar(@PathVariable("id") Long id,
-    @RequestParam(value = "archivo", required = false) MultipartFile archivo,
     @Valid Provincia provincia, BindingResult br, RedirectAttributes ra)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     {
         if (br.hasErrors())
         {
-        return this.editar(id, provincia, false);
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("fragments/base");
+        maw.addObject("titulo", "Editar provincia");
+        maw.addObject("vista", "provincia/editar");
+        return maw;
+
         }
 
         Provincia registro = provinciaServicio.seleccionarPorId(id);
