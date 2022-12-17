@@ -5,7 +5,7 @@
                 <div class="card-header">
                     Editar Festividad
                 </div>
-                <form class="card-body" th:action="@{'/fiestas/editar/{id}' (id=${fiesta.id})}" th:object="${fiesta}" method="POST" enctype="multipart/form-data">
+                <form class="card-body" th:action="@{'/fiestas/editar/{id}' (id=${fiesta.id})}" th:object="${fiesta}" method="PUT" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" th:field="*{nombre}" th:errorClass="'is-invalid'">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="archivo" class="form-label">Foto</label>
-                        <input class="form-control" type="file" id="archivo" name="archivo" accept="image/*" required>
+                        <input class="form-control" type="file" id="archivo" name="archivo" accept="image/*">
                     </div>
                     <div class="mb-3">
                         <label for="predio" class="form-label">Predio donde se realiza</label>
@@ -48,7 +48,7 @@
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('predio')}" th:errors="*{predio}"></div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mx-2">Guardar</button>
+                        <button type="submit" class="btn btn-primary mx-2">Editar</button>
                         <a href="/fiestas" class="btn btn-secondary mx-2">Volver</a>
                     </div>
                 </form>
