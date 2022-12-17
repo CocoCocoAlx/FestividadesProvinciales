@@ -1,6 +1,8 @@
 package com.polotic.FiestasProvinciales.entidades;
 
 
+import java.util.List;
+
 import javax.persistence.*;
 import lombok.*;
 
@@ -18,6 +20,9 @@ public class Predio {
     private String ubicación;
     private int capacidad;
 
+    @OneToMany(mappedBy = "predio")
+    private List<Fiesta> fiestas;
+    
     @Override
      public String toString(){
         return this.ubicación;

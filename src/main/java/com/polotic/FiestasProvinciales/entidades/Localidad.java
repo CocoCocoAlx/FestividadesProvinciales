@@ -31,7 +31,6 @@ public class Localidad {
     private int distancia;
 
     @ManyToOne
-    @JsonBackReference
     private Provincia provincias;
 
 
