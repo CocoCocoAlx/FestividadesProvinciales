@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -43,10 +44,12 @@ public class Fiesta{
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
+    @Future(message = "La fecha debe ser posterior a la actual")
     private Date fechaInicio;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
+    @Future(message = "La fecha debe ser posterior a la actual")
     private Date fechaFin;
 
     private String enlace;

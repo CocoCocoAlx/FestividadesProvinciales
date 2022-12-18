@@ -86,7 +86,7 @@ public class LocalidadControlador implements WebMvcConfigurer {
     @Valid Localidad localidad, BindingResult br, RedirectAttributes ra)
     {
         if (br.hasErrors())
-        {
+        {}
         
         Localidad registro = localidadServicio.seleccionarPorId(id);
         registro.setNombre(localidad.getNombre());
