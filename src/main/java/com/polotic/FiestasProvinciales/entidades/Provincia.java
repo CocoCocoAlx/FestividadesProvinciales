@@ -2,7 +2,13 @@ package com.polotic.FiestasProvinciales.entidades;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -29,8 +35,7 @@ public class Provincia {
     @Size(max = 250, message= "Nombre demasiado largo")
     private String informacion;
 
-    @OneToMany(mappedBy = "provincia")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "provincias")
     private List<Localidad> localidades;
     
     @Override

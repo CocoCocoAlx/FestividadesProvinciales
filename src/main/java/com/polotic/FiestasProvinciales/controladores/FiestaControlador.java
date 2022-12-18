@@ -46,6 +46,17 @@ public class FiestaControlador implements WebMvcConfigurer {
 
     }
 
+    @GetMapping("/{id}")
+    private ModelAndView uno(@PathVariable("id") Long id)
+    {
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("fragments/base");
+        maw.addObject("titulo", "Detalle de la festividad #" + id);
+        maw.addObject("vista", "fiestas/ver");
+        maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));
+        return maw;
+    }
+
     @GetMapping("/agregar")
     private ModelAndView agregar(Fiesta fiesta)
     {
@@ -53,7 +64,6 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar festividad");
         maw.addObject("vista", "fiestas/agregar");
-        maw.addObject("predio", fiestaServicio.mostrarTodos());
         return maw;
 
     }
@@ -74,25 +84,41 @@ public class FiestaControlador implements WebMvcConfigurer {
         String tipo = archivo.getContentType();
         String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
         String foto = fiesta.getId() + extension;
+<<<<<<< HEAD
         String ruta = Paths.get("/scr/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
+=======
+        String ruta = Paths.get("src/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
+>>>>>>> 383e09de739b01333921caccc7bf78d1acad70ec
 
         ModelAndView maw = this.inicio();
 
         try {
-            archivo.transferTo(new File(ruta));
-        } catch (Exception error) {
-            maw.addObject("error", "No se pudo guardar el archivo.");
+            archivo.transferTo( new File(ruta) );
+        } catch (Exception e) {
+            maw.addObject("error", "No se pudo guardar la imagen");
             return maw;
         }
 
         fiesta.setFoto(foto);
         fiestaServicio.guardar(fiesta);
+<<<<<<< HEAD
         maw.addObject("correcto", "El archivo fue cargado exitosamente");
         return maw;
     }
+=======
+        maw.addObject("exito", "Fiesta agregada exitosamente");
+		return maw;
+	}
+>>>>>>> 383e09de739b01333921caccc7bf78d1acad70ec
 
     @GetMapping("/editar/{id}")
-    private ModelAndView editar(@PathVariable("id") Long id, Fiesta fiesta, boolean estaGuardado) {
+    public ModelAndView editar(@PathVariable("id") Long id, Fiesta fiesta)
+    {
+        return this.editar(id, fiesta, true);
+    }
+
+    public ModelAndView editar(@PathVariable("id") Long id, Fiesta fiesta, boolean estaGuardado)
+    {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar festividad");
@@ -120,7 +146,8 @@ public class FiestaControlador implements WebMvcConfigurer {
         Fiesta registro = fiestaServicio.seleccionarPorId(id);
         registro.setNombre(fiesta.getNombre());
         registro.setDescripcion(fiesta.getDescripcion());
-        registro.setFecha(fiesta.getFecha());
+        registro.setFechaInicio(fiesta.getFechaInicio());
+        registro.setFechaFin(fiesta.getFechaFin());
         registro.setEnlace(fiesta.getEnlace());
         registro.setPredio(fiesta.getPredio());
         ModelAndView maw = this.inicio();
@@ -130,7 +157,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         String tipo = archivo.getContentType();
         String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
         String foto = fiesta.getId() + extension;
-        String ruta = Paths.get("/scr/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
+        String ruta = Paths.get("scr/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
 
         try {
             archivo.transferTo(new File(ruta));
