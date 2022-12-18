@@ -56,7 +56,7 @@ public class LocalidadControlador implements WebMvcConfigurer {
         
         if (br.hasErrors()) {
         return this.agregar(localidad);
-        }
+        
 
         localidadServicio.guardar(localidad);
 

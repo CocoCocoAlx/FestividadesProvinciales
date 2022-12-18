@@ -73,7 +73,9 @@ public class FiestaControlador implements WebMvcConfigurer {
 
         String tipo = archivo.getContentType();
         String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
-        
+        String foto = fiesta.getId() + extension;
+        String ruta = Paths.get("/scr/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
+
         ModelAndView maw = this.inicio();
 
         try {
@@ -83,7 +85,12 @@ public class FiestaControlador implements WebMvcConfigurer {
             return maw;
         }
 
-       
+        fiesta.setFoto(foto);
+        fiestaServicio.guardar(fiesta);
+        maw.addObject("correcto", "El archivo fue cargado exitosamente");
+        return maw;
+    }
+
     @GetMapping("/editar/{id}")
     private ModelAndView editar(@PathVariable("id") Long id, Fiesta fiesta, boolean estaGuardado) {
         ModelAndView maw = new ModelAndView();
@@ -92,7 +99,14 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.addObject("vista", "fiestas/editar");
         maw.addObject("predio", fiestaServicio.mostrarTodos());
 
-       
+        if (estaGuardado)
+            maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));
+        else
+            fiesta.setFoto(fiestaServicio.seleccionarPorId(id).getFoto());
+
+        return maw;
+    }
+
     @PutMapping("/editar/{id}")
     private ModelAndView actualizar(@PathVariable("id") Long id,
     @RequestParam(value = "archivo", required = false) MultipartFile archivo,
