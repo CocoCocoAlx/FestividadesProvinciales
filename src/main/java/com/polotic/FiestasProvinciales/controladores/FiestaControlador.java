@@ -35,8 +35,7 @@ public class FiestaControlador implements WebMvcConfigurer {
     PredioServicio predioServicio;
 
     @GetMapping
-    private ModelAndView inicio()
-    {
+    private ModelAndView inicio() {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Listado de festividades");
@@ -47,8 +46,7 @@ public class FiestaControlador implements WebMvcConfigurer {
     }
 
     @GetMapping("/{id}")
-    private ModelAndView uno(@PathVariable("id") Long id)
-    {
+    private ModelAndView uno(@PathVariable("id") Long id) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Detalle de la festividad #" + id);
@@ -58,8 +56,7 @@ public class FiestaControlador implements WebMvcConfigurer {
     }
 
     @GetMapping("/agregar")
-    private ModelAndView agregar(Fiesta fiesta)
-    {
+    private ModelAndView agregar(Fiesta fiesta) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar festividad");
@@ -70,8 +67,7 @@ public class FiestaControlador implements WebMvcConfigurer {
 
     @PostMapping("/agregar")
     public ModelAndView guardar(@RequestParam("archivo") MultipartFile archivo,
-    @Valid Fiesta fiesta, BindingResult br, RedirectAttributes ra)
-    {
+            @Valid Fiesta fiesta, BindingResult br, RedirectAttributes ra) {
         if (archivo.isEmpty())
             br.reject("archivo", "Por favor, cargar un archivo válido");
 
@@ -84,16 +80,11 @@ public class FiestaControlador implements WebMvcConfigurer {
         String tipo = archivo.getContentType();
         String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
         String foto = fiesta.getId() + extension;
-<<<<<<< HEAD
-        String ruta = Paths.get("/scr/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
-=======
         String ruta = Paths.get("src/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
->>>>>>> 383e09de739b01333921caccc7bf78d1acad70ec
-
         ModelAndView maw = this.inicio();
 
         try {
-            archivo.transferTo( new File(ruta) );
+            archivo.transferTo(new File(ruta));
         } catch (Exception e) {
             maw.addObject("error", "No se pudo guardar la imagen");
             return maw;
@@ -101,24 +92,16 @@ public class FiestaControlador implements WebMvcConfigurer {
 
         fiesta.setFoto(foto);
         fiestaServicio.guardar(fiesta);
-<<<<<<< HEAD
-        maw.addObject("correcto", "El archivo fue cargado exitosamente");
+        maw.addObject("exito", "Fiesta agregada exitosamente");
         return maw;
     }
-=======
-        maw.addObject("exito", "Fiesta agregada exitosamente");
-		return maw;
-	}
->>>>>>> 383e09de739b01333921caccc7bf78d1acad70ec
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Long id, Fiesta fiesta)
-    {
+    public ModelAndView editar(@PathVariable("id") Long id, Fiesta fiesta) {
         return this.editar(id, fiesta, true);
     }
 
-    public ModelAndView editar(@PathVariable("id") Long id, Fiesta fiesta, boolean estaGuardado)
-    {
+    public ModelAndView editar(@PathVariable("id") Long id, Fiesta fiesta, boolean estaGuardado) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar festividad");
@@ -135,12 +118,10 @@ public class FiestaControlador implements WebMvcConfigurer {
 
     @PutMapping("/editar/{id}")
     private ModelAndView actualizar(@PathVariable("id") Long id,
-    @RequestParam(value = "archivo", required = false) MultipartFile archivo,
-    @Valid Fiesta fiesta, BindingResult br, RedirectAttributes ra)
-    {
-        if (br.hasErrors())
-        {
-        return this.editar(id, fiesta, false);
+            @RequestParam(value = "archivo", required = false) MultipartFile archivo,
+            @Valid Fiesta fiesta, BindingResult br, RedirectAttributes ra) {
+        if (br.hasErrors()) {
+            return this.editar(id, fiesta, false);
         }
 
         Fiesta registro = fiestaServicio.seleccionarPorId(id);
@@ -152,35 +133,32 @@ public class FiestaControlador implements WebMvcConfigurer {
         registro.setPredio(fiesta.getPredio());
         ModelAndView maw = this.inicio();
 
-        if (! archivo.isEmpty())
-        {
-        String tipo = archivo.getContentType();
-        String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
-        String foto = fiesta.getId() + extension;
-        String ruta = Paths.get("scr/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
+        if (!archivo.isEmpty()) {
+            String tipo = archivo.getContentType();
+            String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
+            String foto = fiesta.getId() + extension;
+            String ruta = Paths.get("scr/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
 
-        try {
-            archivo.transferTo(new File(ruta));
-        } catch (Exception error) {
-            maw.addObject("error", "No se pudo guardar el archivo.");
-            return maw;
-        }
+            try {
+                archivo.transferTo(new File(ruta));
+            } catch (Exception error) {
+                maw.addObject("error", "No se pudo guardar el archivo.");
+                return maw;
+            }
 
-        registro.setFoto(foto);
+            registro.setFoto(foto);
         }
 
         fiestaServicio.guardar(fiesta);
-        maw.addObject("correcto","Festividad editada correctamente.");
+        maw.addObject("correcto", "Festividad editada correctamente.");
         return maw;
     }
 
     @DeleteMapping("/{id}")
-    private ModelAndView borrar(@PathVariable("id") Long id)
-    {
+    private ModelAndView borrar(@PathVariable("id") Long id) {
         fiestaServicio.borrar(id);
         ModelAndView maw = this.inicio();
         maw.addObject("correcto", "Festividad eliminada correctamente.");
         return maw;
     }
 }
-
