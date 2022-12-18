@@ -1,12 +1,18 @@
-header {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #6aa2e2;
-
+/* cambiar tipo de letra */
+nav.navbar ul.nav li {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: larger;
+    font-weight: bold;
+    
+}
+ 
+/* cambiar el color de fondo a la barra */
+nav.navbar {
+    background-color: rgb(124, 124, 231);
 }
 
-
 body {
-    background: url("/src/main/resources/static/images/fondo2.jpg")no-repeat center center fixed;
+    background-image: url("/images/fondo.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -15,10 +21,7 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
-div {
-    width: 80vw;
-    height: 80vh;
-}
+
 
 img {
     max-width:100%;
@@ -27,20 +30,6 @@ img {
     align-items: center;
  }
  
- /* ---------------------------------------------------
-                NAVBAR
---------------------------------------------------- */
-
-.navbar {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #6aa2e2;
-    z-index: 9999;
-}
-
-.navbar-brand {
-    font-size: 35px;
-}
-
 /* ---------------------------------------------------
                 CONTENT STYLE
 --------------------------------------------------- */
@@ -61,31 +50,3 @@ img {
 @media (min-width: 992px) {
     .card-columns { column-count: 4; }
 }
-
-/* ---------------------------------------------------
-                SELECT2
------------------------------------------------------ */
-
-.select2-selection__rendered {
-    line-height: 38px !important;
-}
-
-.select2-container .select2-selection--single {
-    height: 38px !important;
-}
-
-.select2-selection__arrow {
-    height: 36px !important;
-}
-
-
-.carousel-item {
-    height: 65vh;
-    min-height: 300px;
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-  
