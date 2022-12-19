@@ -1,0 +1,65 @@
+<div class="container p-3" th:fragment="contenido">
+    <div class="card p-4">
+        <div class="row">
+            <div th:if="${exito}" class="alert alert-success alert-dismissible fade show">
+                <span th:text="${exito}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col h2">Listado de Predio</div>
+            <a href="/predio/agregar" class="col-auto btn btn-lg btn-success">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+
+        <table id="predio" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fechas de Presentacion</th>
+                    <th>Enlace a web / FB / IG</th>
+                    <th>Fotos</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="f : ${predio}">
+                    <td th:text="${f.nombre}"></td>
+                    <td th:text="${f.descripcion}"></td>
+                    <td th:text="'Del '+${#dates.format(f.fechaPresentacion, 'dd/MM/yyyy')}+' al '+${#dates.format(f.fechaPresentacion, 'dd/MM/yyyy')}"></td>
+                    <td style="text-align: center;"> <a class="fa fa-external-link" th:href="@{${f.enlace}}"></a></td>
+                    <td style="text-align: center;"><img th:src="${'/images/predio/' + f.foto}" height="150px"></td>
+                    <td th:text="${f.predio}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/predio/{id}' (id=${f.id})}">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+
+                        <a class="btn btn-secondary" th:href="@{'/fiestas/editar/{id}' (id=${f.id})}">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+
+                        <form class="d-inline" th:action="@{'/predio/{id}' (id=${f.id})}" th:method="DELETE">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro de eliminar?')">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:fragment="script">
+    $(document).ready(function() {
+        $('#fiestas').DataTable();
+    } );
+</script>

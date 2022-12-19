@@ -1,9 +1,9 @@
 package com.polotic.FiestasProvinciales.entidades;
 
-
-//import java.util.Date;
-
+import java.util.Date;
 import java.util.*;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,18 +30,19 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 
-public class Predio {
+public class Artista {
 
     
       @Id
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       private long Id;
   
-      @OneToMany(mappedBy = "predio")
+      @OneToMany(mappedBy = "artista")
       @JsonManagedReference
       private List<Fiesta> fiestas;
 
-      @NotBlank(message = "Campo obligatorio")
+
+     @NotBlank(message = "Campo obligatorio")
       @Size(max = 250, message= "Nombre demasiado largo")
       private String nombre;
   
@@ -57,6 +58,8 @@ public class Predio {
       //@Temporal(TemporalType.DATE)
       //private Date fechaFin;
   
+      private String hora;
+      
       private String enlace;
   
       private String foto;
@@ -65,3 +68,4 @@ public class Predio {
       //private Fiesta fiesta;
 
 }
+

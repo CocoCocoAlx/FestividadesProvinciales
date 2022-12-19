@@ -21,27 +21,27 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.polotic.FiestasProvinciales.entidades.Predio;
+import com.polotic.FiestasProvinciales.entidades.Artista;
 import com.polotic.FiestasProvinciales.servicios.FiestaServicio;
-import com.polotic.FiestasProvinciales.servicios.PredioServicio;
+import com.polotic.FiestasProvinciales.servicios.ArtistaServicio;
 
 @RestController
-@RequestMapping("predios")
-public class PredioControlador implements WebMvcConfigurer {
+@RequestMapping("artistas")
+public class ArtistaControlador implements WebMvcConfigurer {
+
+    @Autowired
+    ArtistaServicio artistaServicio;
 
     @Autowired
     FiestaServicio fiestaServicio;
-
-    @Autowired
-    PredioServicio predioServicio;
 
     @GetMapping
     private ModelAndView inicio() {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Listado de festividades");
-        maw.addObject("vista", "predios/inicio");
-        maw.addObject("predios", predioServicio.mostrarTodos());
+        maw.addObject("vista", "artistas/inicio");
+        maw.addObject("artistas", artistaServicio.mostrarTodos());
         return maw;
 
     }
@@ -50,37 +50,37 @@ public class PredioControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Detalle de la festividad #" + id);
-        maw.addObject("vista", "predios/ver");
-        maw.addObject("predios", predioServicio.seleccionarPorId(id));
+        maw.addObject("vista", "artistas/ver");
+        maw.addObject("artistas", artistaServicio.seleccionarPorId(id));
         return maw;
     }
 
     @GetMapping("/agregar")
-    private ModelAndView agregar(Predio predio) {
+    private ModelAndView agregar(Artista artista) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar festividad");
-        maw.addObject("vista", "predios/agregar");
+        maw.addObject("vista", "artistas/agregar");
         return maw;
 
     }
 
     @PostMapping("/agregar")
     public ModelAndView guardar(@RequestParam("archivo") MultipartFile archivo,
-            @Valid Predio predio, BindingResult br, RedirectAttributes ra) {
+            @Valid Artista artista, BindingResult br, RedirectAttributes ra) {
         if (archivo.isEmpty())
             br.reject("archivo", "Por favor, cargar un archivo válido");
 
         if (br.hasErrors()) {
-            return this.agregar(predio);
+            return this.agregar(artista);
         }
 
-        predioServicio.guardar(predio);
+        artistaServicio.guardar(artista);
 
         String tipo = archivo.getContentType();
         String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
-        String foto = predio.getId() + extension;
-        String ruta = Paths.get("src/main/resources/static/images/fiestas", foto).toAbsolutePath().toString();
+        String foto = artista.getId() + extension;
+        String ruta = Paths.get("src/main/resources/static/images/artista", foto).toAbsolutePath().toString();
         ModelAndView maw = this.inicio();
 
         try {
@@ -90,28 +90,28 @@ public class PredioControlador implements WebMvcConfigurer {
             return maw;
         }
 
-        predio.setFoto(foto);
-        predioServicio.guardar(predio);
+        artista.setFoto(foto);
+        artistaServicio.guardar(artista);
         maw.addObject("exito", "Predio agregada exitosamente");
         return maw;
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Long id, Predio predio) {
-        return this.editar(id, predio, true);
+    public ModelAndView editar(@PathVariable("id") Long id, Artista artista) {
+        return this.editar(id, artista, true);
     }
 
-    public ModelAndView editar(@PathVariable("id") Long id, Predio predio, boolean estaGuardado) {
+    public ModelAndView editar(@PathVariable("id") Long id, Artista artista, boolean estaGuardado) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar festividad");
-        maw.addObject("vista", "predio/editar");
-        maw.addObject("predio", predioServicio.mostrarTodos());
+        maw.addObject("vista", "artistas/editar");
+        maw.addObject("artistas", artistaServicio.mostrarTodos());
 
         if (estaGuardado)
-            maw.addObject("predio", predioServicio.seleccionarPorId(id));
+            maw.addObject("artistas", artistaServicio.seleccionarPorId(id));
         else
-            predio.setFoto(predioServicio.seleccionarPorId(id).getFoto());
+           artista.setFoto(artistaServicio.seleccionarPorId(id).getFoto());
 
         return maw;
     }
@@ -119,25 +119,25 @@ public class PredioControlador implements WebMvcConfigurer {
     @PutMapping("/editar/{id}")
     private ModelAndView actualizar(@PathVariable("id") Long id,
             @RequestParam(value = "archivo", required = false) MultipartFile archivo,
-            @Valid Predio predio, BindingResult br, RedirectAttributes ra) {
+            @Valid Artista artista, BindingResult br, RedirectAttributes ra) {
         if (br.hasErrors()) {
-            return this.editar(id, predio, false);
+            return this.editar(id, artista, false);
         }
 
-        Predio registro = predioServicio.seleccionarPorId(id);
-        registro.setNombre(predio.getNombre());
-        registro.setDescripcion(predio.getDescripcion());
-        registro.setFechaPresentación(predio.getFechaPresentación());
-        //registro.setFechaFin(predio.getFechaFin());
-        registro.setEnlace(predio.getEnlace());
-        //registro.setPredio(predio.getPredio());
+        Artista registro = artistaServicio.seleccionarPorId(id);
+        registro.setNombre(artista.getNombre());
+        registro.setDescripcion(artista.getDescripcion());
+        registro.setFechaPresentación(artista.getFechaPresentación());
+        //registro.setFechaFin(artista.getFechaFin());
+        registro.setEnlace(artista.getEnlace());
+        registro.setHora(artista.getHora());
         ModelAndView maw = this.inicio();
 
         if (!archivo.isEmpty()) {
             String tipo = archivo.getContentType();
             String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
-            String foto = predio.getId() + extension;
-            String ruta = Paths.get("scr/main/resources/static/images/predio", foto).toAbsolutePath().toString();
+            String foto = artista.getId() + extension;
+            String ruta = Paths.get("scr/main/resources/static/images/artistas", foto).toAbsolutePath().toString();
 
             try {
                 archivo.transferTo(new File(ruta));
@@ -149,16 +149,17 @@ public class PredioControlador implements WebMvcConfigurer {
             registro.setFoto(foto);
         }
 
-        predioServicio.guardar(predio);
+        artistaServicio.guardar(artista);
         maw.addObject("correcto", "Festividad editada correctamente.");
         return maw;
     }
 
     @DeleteMapping("/{id}")
     private ModelAndView borrar(@PathVariable("id") Long id) {
-        predioServicio.borrar(id);
+        artistaServicio.borrar(id);
         ModelAndView maw = this.inicio();
         maw.addObject("correcto", "Festividad eliminada correctamente.");
         return maw;
     }
 }
+
