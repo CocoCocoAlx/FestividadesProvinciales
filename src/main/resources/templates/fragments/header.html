@@ -1,53 +1,78 @@
 <nav class="navbar navbar-expand-lg navbar-light " th:fragment="header">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+
+
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="images/logo.jpg" alt="" width="50px" height="50x">Fiestas Regionales</h3>
+    </a>
+
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
-  <!-- <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-3 border-bottom border-dark" th:fragment="header"> -->
-    <div class="container-fluid">
-      <a class="navbar-brand">
-        <h3><img src="/images/favicon.jpg" alt="" width="24px" height="24px">Fiestas Regionales</h3>
-      </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="/inicio" role="button" class="img_nav"><img class="img_nav" src="images/inicio icono.jpg">
+            <br>
+            <small>INICIO</small>
+          </a>
+        </li>
 
-      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="##navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="nav navbar-nav navbar-center">
+          <li class="nav-item dropdown">
+            <a class="img_nav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img class="img_nav" src="images/imagen provincia.jpg">
+              <br>
+              <small>PROVINCIA</small>
+            </a>
 
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item centrado"><a class="nav-link active text-uppercase font-monospace" aria-current="page"
-              href="/">Inicio</a></li>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/fiestas">Misiones</a></li>
 
-              <li class="nav-item dropdown centrado">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    PROVINCIA
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/fiestas">Misiones</a></li>
-                   
-                    <li><hr class="dropdown-divider"></li>
-                   
-                </ul>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
+            </ul>
+          </li>
+
+
+          <ul class="navbar-nav mr-auto">
+            <li>
+              <a href="/fiestas" role="button" class="img_nav"><img class="img_nav" src="images/calendario.jpg">
+                <br>
+                <small>FIESTAS</small>
+              </a>
+            </li>
+          </ul>
+
+          <div class="navbar navbar-dark justify-content-lg-end">
+            <li class="nav-item" sec:authorize="isAnonymous()">
+              <button class="btn btn-dark" aria-current="page" href="/login">
+                <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
+              </button>
             </li>
 
-          <li class="nav-item centrado"><a class="nav-link text-uppercase font-monospace" href="/fiestas">Agenda</a></li>
-
-          <li class="nav-item centrado"><a class="nav-link text-uppercase font-monospace" href="#">Contacto</a></li>
-
-
-          <div class="mx-5 d-flex">
-            <a href="...">
-              <button type="button"  style="background-color:rgb(186, 223, 240); border-color:blue; color:rgba(2, 9, 39, 0.24)"
-                class="btn btn-outline-danger me-2 border border-2 rounded-0 text-uppercase font-monospace">
-                Inicia sesión
+            <li class="nav-item" sec:authorize="isAnonymous()">
+              <button class="btn btn-dark" aria-current="page" href="/registro">
+                <i class="fa-solid fa-user-plus"></i> Registrarse
               </button>
-            </a>
-            
+            </li>
+
+
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+              <form class="form-inline" th:action="@{/logout}" method="POST">
+                <button class="btn btn-dark" type="submit" onclick="return confirm('¿Seguro de cerrar sesión?')">
+                  <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                </button>
+              </form>
+            </li>
           </div>
+
         </ul>
-      </div>
     </div>
-  </nav>
+  </div>
 
 
+</nav>
