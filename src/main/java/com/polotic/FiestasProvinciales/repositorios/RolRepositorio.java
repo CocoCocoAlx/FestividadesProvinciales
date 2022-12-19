@@ -10,5 +10,5 @@ import com.polotic.FiestasProvinciales.entidades.Rol;
 @Repository
 public interface RolRepositorio extends CrudRepository<Rol, Long> {
 
-    Optional<Rol> buscarPorNombre(String string);
+    Optional<Rol> findByNombre(String string);
 }

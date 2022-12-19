@@ -33,7 +33,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepositorio.buscarPorCorreo(correo);
+        Usuario usuario = usuarioRepositorio.findByCorreo(correo);
         List<GrantedAuthority> ga = buildAuthorities(usuario.getRol());
         return armarUsuario(usuario, ga);
     }
@@ -50,11 +50,11 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional
     public void registro(Usuario usuario) {
-        if (usuarioRepositorio.existePorCorreo(usuario.getCorreo()))
+        if (usuarioRepositorio.existsByCorreo(usuario.getCorreo()))
             throw new IllegalArgumentException("Ya existe un usuario con este email");
 
         usuario.setClave( encriptador.encode(usuario.getClave()) );
-        usuario.setRol(rolRepositorio.buscarPorNombre("Usuario").orElseThrow(() -> new IllegalArgumentException("Error al crear usuario")));
+        usuario.setRol(rolRepositorio.findByNombre("Usuario").orElseThrow(() -> new IllegalArgumentException("Error al crear usuario")));
         usuarioRepositorio.save(usuario);
     }
 

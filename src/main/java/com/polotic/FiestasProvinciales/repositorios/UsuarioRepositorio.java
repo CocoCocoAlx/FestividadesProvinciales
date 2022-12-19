@@ -7,6 +7,6 @@ import com.polotic.FiestasProvinciales.entidades.Usuario;
 
 @Repository
 public interface UsuarioRepositorio extends CrudRepository<Usuario, Long>{
-    Usuario buscarPorCorreo(String correo);
-    boolean existePorCorreo(String correo);
+    Usuario findByCorreo(String correo);
+    boolean existsByCorreo(String correo);
 }
