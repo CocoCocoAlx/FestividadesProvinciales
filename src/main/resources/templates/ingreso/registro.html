@@ -13,13 +13,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="clave" class="form-label">Contraseña</label>
-                        <input type="clave" class="form-control" id="clave" th:field="*{clave}" th:errorClass="'is-invalid'">
+                        <input type="password" class="form-control" id="clave" th:field="*{clave}" th:errorClass="'is-invalid'">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="confirmar" class="form-label">Repita la contraseña</label>
-                        <input type="clave" class="form-control" id="confirmar" th:field="*{confirmar}" th:errorClass="'is-invalid'">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('confirmar')}" th:errors="*{confirmar}"></div>
+                        <label for="confirmacion" class="form-label">Repita la contraseña</label>
+                        <input type="password" class="form-control" id="confirmacion" th:field="*{confirmacion}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('confirmacion')}" th:errors="*{confirmacion}"></div>
                     </div>
                     <div class="row mb-3">
                         <div class="g-recaptcha col-12 d-flex justify-content-center" name="recaptcha" th:errorClass="'is-invalid'" data-sitekey="6Ldjs2wjAAAAAH1Gwrcg3gwqxAOaMTKlvr5bomcu"></div>
