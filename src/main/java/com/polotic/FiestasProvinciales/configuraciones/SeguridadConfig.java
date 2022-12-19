@@ -30,7 +30,7 @@ public class SeguridadConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests()
-                .antMatchers("/css/*", "/js/*", "/fonts/*", "/images/*", "/images/*/*", "/", "/registro")
+                .antMatchers("/css/*", "/js/*", "/fonts/*", "/images/*", "/images/*/*", "/images/*/*/*", "/", "/registro")
                 .permitAll()
             .and()
             .authorizeHttpRequests().antMatchers("/fiestas")
@@ -39,7 +39,7 @@ public class SeguridadConfig {
             .authorizeHttpRequests().antMatchers("/fiestas/agregar")
                 .hasRole("Administrador")
             .and()
-            .authorizeHttpRequests().antMatchers("/jugadores/editar/*")
+            .authorizeHttpRequests().antMatchers("/fiestas/editar/*")
                 .hasRole("Administrador")
                 .anyRequest().authenticated()
             .and()

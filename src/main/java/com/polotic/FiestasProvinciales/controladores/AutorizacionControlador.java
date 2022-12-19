@@ -82,7 +82,7 @@ public class AutorizacionControlador {
         Usuario u = new Usuario();
         u.setCorreo(registroDto.getCorreo());
         u.setClave(encriptador.encode(registroDto.getClave()));
-        u.setRol(rolRepositorio.findByNombre("Administrador").orElseThrow(() -> new IllegalArgumentException("Error al crear usuario.")));
+        u.setRol(rolRepositorio.findByNombre("Usuario").orElseThrow(() -> new IllegalArgumentException("Error al crear usuario.")));
 
 		usuarioRepositorio.save(u);
 
