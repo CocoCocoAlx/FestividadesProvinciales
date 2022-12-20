@@ -25,13 +25,19 @@
           <div class="mx-5 d-flex">
             <a href="...">
               <button type="button"
-                class="btn btn-outline-danger me-2 border border-2 border-danger rounded-0 text-uppercase font-monospace">
+                class="btn btn-outline-danger me-2 border border-2 border-danger rounded-0 text-uppercase font-monospace" sec:authorize="isAuthenticated()">
+                Cerrar sesión
+              </button>
+            </a>
+            <a href="...">
+              <button type="button"
+                class="btn btn-outline-danger me-2 border border-2 border-danger rounded-0 text-uppercase font-monospace" sec:authorize="isAnonymous()">
                 Inicia sesión
               </button>
             </a>
             <a href="...">
               <button type="button"
-                class="btn text-dark btn-outline-danger link-light border border-2 border-danger rounded-0 text-uppercase font-monospace">
+                class="btn text-dark btn-outline-danger link-light border border-2 border-danger rounded-0 text-uppercase font-monospace" sec:authorize="isAnonymous()">
                 Registrate
               </button>
             </a>

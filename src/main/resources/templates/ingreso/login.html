@@ -5,7 +5,7 @@
                 <div class="card-header">
                     Iniciar sesión
                 </div>
-                <form class="card-body" th:action="@{/autexitosa}" method="POST">
+                <form class="card-body" th:action="@{/logincheck}" method="POST">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo electrónico</label>
@@ -20,7 +20,7 @@
                     </div>
                 </form>
                 <div class="card-footer text-center p-3">
-                    <a href="/registro" class="text-decoration-none fw-bold h5">Crear una cuenta nueva</a>
+                    <a href="/registro" class="text-decoration-none fw-bold h5">Todavía no tengo una cuenta</a>
                 </div>
             </div>
         </div>

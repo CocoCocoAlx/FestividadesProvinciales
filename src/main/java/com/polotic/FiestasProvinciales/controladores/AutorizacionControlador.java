@@ -35,22 +35,22 @@ public class AutorizacionControlador {
     @Autowired
     private RecaptchaServicio recaptchaServicio;
 
-    @GetMapping("/ingreso")
+    @GetMapping("/login")
     public ModelAndView showLoginForm(Model model, 
         @RequestParam(name = "error", required = false) String error,
-        @RequestParam(name = "salir", required = false) String logout) {
+        @RequestParam(name="logout", required = false) String logout) {
             
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Iniciar sesión");
-        maw.addObject("vista", "ingreso/ingreso");
+        maw.addObject("vista", "ingreso/login");
         model.addAttribute("error", error);
-        model.addAttribute("salir", logout);
+        model.addAttribute("logout", logout);
         return maw;
     }
 
-    @GetMapping({"/autexitosa"})
-    public RedirectView comprobarLogueo(){
+    @GetMapping({"/loginSuccess"})
+    public RedirectView loginCheck(){
         return new RedirectView("/");
     }
     
@@ -82,7 +82,7 @@ public class AutorizacionControlador {
         Usuario u = new Usuario();
         u.setCorreo(registroDto.getCorreo());
         u.setClave(encriptador.encode(registroDto.getClave()));
-        u.setRol(rolRepositorio.findByNombre("Usuario").orElseThrow(() -> new IllegalArgumentException("Error al crear usuario.")));
+        u.setRol(rolRepositorio.findByNombre("Usuario").orElseThrow(() -> new IllegalArgumentException("Error al crear usuario")));
 
 		usuarioRepositorio.save(u);
 
