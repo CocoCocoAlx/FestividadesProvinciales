@@ -2,8 +2,9 @@ package com.polotic.FiestasProvinciales.entidades;
 
 import java.util.Date;
 import java.util.*;
+import java.time.LocalTime;
 
-
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -57,8 +58,10 @@ public class Artista {
       //@DateTimeFormat(pattern = "yyyy-MM-dd")
       //@Temporal(TemporalType.DATE)
       //private Date fechaFin;
-  
-      private String hora;
+
+      @Basic
+      private LocalTime horaPresentacion;
+      
       
       private String enlace;
   

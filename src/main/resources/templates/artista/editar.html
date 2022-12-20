@@ -21,11 +21,11 @@
                         <input type="date" class="form-control" id="fechapresentacion" th:field="*{fechaPresentacion}" th:errorClass="'is-invalid'">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaPresenracion')}" th:errors="*{fechaPresentacion}"></div>
                     </div>
-                    <!--<div class="mb-3">
-                        <label for="fechaFin" class="form-label">Fecha de finalización</label>
-                        <input type="date" class="form-control" id="fechaFin" th:field="*{fechaFin}" th:errorClass="'is-invalid'">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}"></div>
-                    </div>-->
+                    <div class="mb-3">
+                        <label for="hora" class="form-label">Hora</label>
+                        <input type="time" class="form-control" id="hora" th:field="*{hora}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('hora')}" th:errors="*{hora}"></div>
+                    </div>
                     <div class="mb-3">
                         <label for="enlace" class="form-label">Enlace a página web / Página en RRSS</label>
                         <input type="text" class="form-control" id="enlace" th:field="*{enlace}" th:errorClass="'is-invalid'">

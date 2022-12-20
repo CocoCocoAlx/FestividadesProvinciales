@@ -130,7 +130,7 @@ public class ArtistaControlador implements WebMvcConfigurer {
         registro.setFechaPresentación(artista.getFechaPresentación());
         //registro.setFechaFin(artista.getFechaFin());
         registro.setEnlace(artista.getEnlace());
-        registro.setHora(artista.getHora());
+        registro.setHoraPresentacion(artista.getHoraPresentacion());
         ModelAndView maw = this.inicio();
 
         if (!archivo.isEmpty()) {
