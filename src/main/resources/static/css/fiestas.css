@@ -1,9 +1,89 @@
-header {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #6aa2e2;
-
+/* cambiar tipo de letra */
+nav.navbar ul.nav li {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
+    
+}
+ 
+/* cambiar el color de fondo a la barra */
+nav.navbar {
+    background-color: rgb(195, 195, 204);
+    float: center;
+    margin: 0;
+    left: 50%;
+    transform: translatex(-50%);
+    position: relative;
+    
+    
 }
 
+nav ul li { 
+    float: center; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 20px;
+  
+    margin-left: 0.6em;
+    margin-right: 0.6em;
+   
+    
+}
+
+img.img_nav {
+    max-width: 20vw;
+    width: 40px;
+    display: inline-block;
+    align-items: center;
+    
+}
+img {
+    vertical-align: middle;
+  
+    
+}
+
+
+.navbar {
+    
+    min-height: 30px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    
+}
+
+.navbar-brand {
+    font-size: 35px;
+}
+
+
+
+.navbar-fixed-top {
+    background-color: #cacac7!important;
+}
+.navbar-fixed-bottom .navbar-nav>li>a, .navbar-fixed-top-2 .navbar-nav>li>a {
+    color: #1b042918!important;
+}
+.navbar-nav>li>a {
+    padding: 15px 20px;
+    line-height: 20px;
+}
+
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+
+
+a {
+    color: #020a11;
+    text-decoration: none;
+}
 
 body {
     background: url("images/fondo2.jpg")no-repeat center center fixed;
@@ -15,10 +95,7 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
-div {
-    width: 80vw;
-    height: 80vh;
-}
+
 
 img {
     max-width:100%;
@@ -27,19 +104,9 @@ img {
     align-items: center;
  }
  
- /* ---------------------------------------------------
-                NAVBAR
---------------------------------------------------- */
 
-.navbar {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #6aa2e2;
-    z-index: 9999;
-}
 
-.navbar-brand {
-    font-size: 35px;
-}
+
 
 /* ---------------------------------------------------
                 CONTENT STYLE
@@ -48,6 +115,7 @@ img {
 #content {
     width: 100%;
     min-height: 100vh;
+   
 }
 
 @media (min-width: 576px) {
@@ -61,31 +129,3 @@ img {
 @media (min-width: 992px) {
     .card-columns { column-count: 4; }
 }
-
-/* ---------------------------------------------------
-                SELECT2
------------------------------------------------------ */
-
-.select2-selection__rendered {
-    line-height: 38px !important;
-}
-
-.select2-container .select2-selection--single {
-    height: 38px !important;
-}
-
-.select2-selection__arrow {
-    height: 36px !important;
-}
-
-
-.carousel-item {
-    height: 65vh;
-    min-height: 300px;
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-  
