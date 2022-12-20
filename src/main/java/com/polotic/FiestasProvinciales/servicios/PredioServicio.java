@@ -10,31 +10,32 @@ import org.springframework.stereotype.*;
 @Service
 public class PredioServicio {
 
-@Autowired
+    @Autowired
+    PredioRepositorio predioRepositorio;
 
-PredioRepositorio  predioRepositorio;
 
-public List<Predio> getAll(){
-    List<Predio> lista = new ArrayList<>();
-      predioRepositorio.findAll().forEach(registro -> lista.add(registro));
-            return lista;
+    public List<Predio> mostrarTodos()
+    {
+    List<Predio> lista = new ArrayList<Predio>();
+    predioRepositorio.findAll().forEach(registro -> lista.add(registro));
 
-}
+    return lista;
+    }
 
-public Predio getById(Long id){
-return predioRepositorio.findById(id).get();
+    public Predio seleccionarPorId(Long id)
+    {
+        return predioRepositorio.findById(id).get();
+    }
 
-}
+    public void guardar(Predio predio)
+    {
+        predioRepositorio.save(predio);
+    }
 
-public void save(Predio predio){
-   predioRepositorio.save(predio);
-
-}
-
-public void delete(Long id){
-predioRepositorio.deleteById(id);
-
-}
+    public void borrar(Long id)
+    {
+        predioRepositorio.deleteById(id);
+    }
     
 }
 

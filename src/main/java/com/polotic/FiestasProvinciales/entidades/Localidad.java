@@ -1,8 +1,8 @@
 package com.polotic.FiestasProvinciales.entidades;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import java.util.*;
+//import com.fasterxml.jackson.annotation.JsonBackReference;
+//import java.util.*;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
