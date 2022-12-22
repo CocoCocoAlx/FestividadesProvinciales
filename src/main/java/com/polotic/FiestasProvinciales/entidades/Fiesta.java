@@ -14,6 +14,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +34,16 @@ public class Fiesta{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
+    
+    @ManyToOne
+    @JsonBackReference
+    //@NotNull(message = "Debe elegir un valor")
+     Predio predio;
+
+    @ManyToOne
+    @JsonBackReference
+    //@NotNull(message = "Debe elegir un valor")
+    private Artista artista;
 
     @NotBlank(message = "Campo obligatorio")
     @Size(max = 250, message= "Nombre demasiado largo")
@@ -56,7 +67,9 @@ public class Fiesta{
 
     private String foto;
 
-    @ManyToOne
-    private Predio predio;
+    //@ManyToOne
+    //private Predio predio;
 
+    //@ManyToOne
+    //@private Artista artista;
 }

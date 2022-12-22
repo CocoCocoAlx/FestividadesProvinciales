@@ -17,7 +17,6 @@
           </a>
         </li>
 
-
         <ul class="nav navbar-nav navbar-center">
           <li class="nav-item dropdown">
             <a class="img_nav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,7 +35,6 @@
             </ul>
           </li>
 
-
           <ul class="navbar-nav mr-auto">
             <li>
               <a href="/fiestas" role="button" class="img_nav"><img class="img_nav" src="images/calendario.jpg">
@@ -46,32 +44,37 @@
             </li>
           </ul>
 
-          <div class="navbar navbar-dark justify-content-lg-end">
-            <li class="nav-item" sec:authorize="isAnonymous()">
-              <button class="btn btn-dark" aria-current="page" href="/login">
-                <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
+          <ul class="navbar-nav mr-auto">
+            <li>
+              <a href="/contacto" role="button" class="img_nav"><img class="img_nav" src="images/contacto.jpg">
+                <br>
+                <small>CONTACTO</small>
+              </a>
+            </li>
+          </ul>
+
+          <div class="mx-5 d-flex">
+            <a href="/login">
+              <button
+                type="button"
+                class="btn btn-outline-danger me-2 link-light border border-2 border-danger rounded-0 text-uppercase font-monospace"
+              >
+                Inicia sesión
               </button>
-            </li>
-
-            <li class="nav-item" sec:authorize="isAnonymous()">
-              <button class="btn btn-dark" aria-current="page" href="/registro">
-                <i class="fa-solid fa-user-plus"></i> Registrarse
+            </a>
+            <a href="/registro">
+              <button
+                type="button"
+                class="btn btn-outline-danger me-2 link-light border border-2 border-danger rounded-0 text-uppercase font-monospace"
+              >
+                Registrate
               </button>
-            </li>
-
-
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-              <form class="form-inline" th:action="@{/logout}" method="POST">
-                <button class="btn btn-dark" type="submit" onclick="return confirm('¿Seguro de cerrar sesión?')">
-                  <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
-                </button>
-              </form>
-            </li>
+            </a>
           </div>
 
         </ul>
     </div>
   </div>
 
-
+  
 </nav>

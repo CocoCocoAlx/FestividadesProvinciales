@@ -81,8 +81,8 @@ public class LocalidadControlador implements WebMvcConfigurer {
 
     @PutMapping("editar/{id}")
     private ModelAndView actualizar(@PathVariable("id") Long id,
-    @Valid Localidad localidad, BindingResult br, RedirectAttributes ra)
-    {
+    @Valid Localidad localidad, BindingResult br, RedirectAttributes ra){
+    
         if (br.hasErrors())
         {}
         
@@ -90,13 +90,14 @@ public class LocalidadControlador implements WebMvcConfigurer {
         registro.setNombre(localidad.getNombre());
         registro.setInformacion(localidad.getInformacion());
         ModelAndView maw = this.inicio();
-
+        
         
         localidadServicio.guardar(localidad);
         maw.addObject("correcto","localidad editada correctamente.");
         return maw;
-    }
-
+        }     
+        
+    
     @DeleteMapping("/id")
     private ModelAndView borrar(@PathVariable("id") Long id)
     {
