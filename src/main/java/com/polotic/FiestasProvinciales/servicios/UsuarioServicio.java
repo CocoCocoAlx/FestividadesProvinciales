@@ -3,7 +3,6 @@ package com.polotic.FiestasProvinciales.servicios;
 import java.util.*;
 
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,7 +28,7 @@ public class UsuarioServicio implements UserDetailsService {
     private RolRepositorio rolRepositorio;
 
     @Autowired
-    private BCryptPasswordEncoder encriptador;  
+    private BCryptPasswordEncoder encriptador;
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
@@ -44,7 +43,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     public List<GrantedAuthority> buildAuthorities(Rol rol) {
         List<GrantedAuthority> ga = new ArrayList<>();
-        ga.add( new SimpleGrantedAuthority("ROLE_" + rol.getNombre()) );
+        ga.add(new SimpleGrantedAuthority("ROLE_" + rol.getNombre()));
         return ga;
     }
 
@@ -53,8 +52,9 @@ public class UsuarioServicio implements UserDetailsService {
         if (usuarioRepositorio.existsByCorreo(usuario.getCorreo()))
             throw new IllegalArgumentException("Ya existe un usuario con este email");
 
-        usuario.setClave( encriptador.encode(usuario.getClave()) );
-        usuario.setRol(rolRepositorio.findByNombre("Usuario").orElseThrow(() -> new IllegalArgumentException("Error al crear usuario")));
+        usuario.setClave(encriptador.encode(usuario.getClave()));
+        usuario.setRol(rolRepositorio.findByNombre("Usuario")
+                .orElseThrow(() -> new IllegalArgumentException("Error al crear usuario")));
         usuarioRepositorio.save(usuario);
     }
 
