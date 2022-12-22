@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +22,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.polotic.FiestasProvinciales.entidades.Fiesta;
+import com.polotic.FiestasProvinciales.entidades.Usuario;
+import com.polotic.FiestasProvinciales.repositorios.UsuarioRepositorio;
+import com.polotic.FiestasProvinciales.servicios.CorreoServicio;
 import com.polotic.FiestasProvinciales.servicios.FiestaServicio;
 import com.polotic.FiestasProvinciales.servicios.PredioServicio;
+import com.polotic.FiestasProvinciales.servicios.UsuarioServicio;
 
 @RestController
 @RequestMapping("fiestas")
@@ -34,6 +39,9 @@ public class FiestaControlador implements WebMvcConfigurer {
     @Autowired
     PredioServicio predioServicio;
 
+    @Autowired
+    CorreoServicio correoServicio;
+  
     @GetMapping
     private ModelAndView inicio() {
         ModelAndView maw = new ModelAndView();
@@ -52,7 +60,18 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.addObject("titulo", "Detalle de la festividad #" + id);
         maw.addObject("vista", "fiestas/ver");
         maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));
+
         return maw;
+    }
+
+    @PostMapping("/enviarcorreo/{id}")
+    public ModelAndView enviarCorreo(@PathVariable("id") Long id) {
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("fragments/base");
+        maw.addObject("titulo", "Detalle de la festividad #" + id);
+        maw.addObject("vista", "fiestas/correo");
+        maw.addObject("exito", "Correo enviado.");        
+        return uno(id);
     }
 
     @GetMapping("/agregar")
@@ -150,7 +169,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         }
 
         fiestaServicio.guardar(fiesta);
-        maw.addObject("correcto", "Festividad editada correctamente.");
+        maw.addObject("exito", "Festividad editada correctamente.");
         return maw;
     }
 
@@ -158,7 +177,7 @@ public class FiestaControlador implements WebMvcConfigurer {
     private ModelAndView borrar(@PathVariable("id") Long id) {
         fiestaServicio.borrar(id);
         ModelAndView maw = this.inicio();
-        maw.addObject("correcto", "Festividad eliminada correctamente.");
+        maw.addObject("exito", "Festividad eliminada correctamente.");
         return maw;
     }
 }
