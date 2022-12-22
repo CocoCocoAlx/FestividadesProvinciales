@@ -29,7 +29,7 @@
                     </p>
                     <form th:action="@{'/fiestas/enviarcorreo/{id}' (id=${fiesta.id})}" th:object="${fiesta}" method="POST">
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-danger" onclick="enviarCorreo()">Enviar por correo</button>
+                            <button type="submit" class="btn btn-danger" onclick="enviarcorreo()">Enviar por correo</button>
                         </div>
                     </form>
                     <div class="d-flex justify-content-center">

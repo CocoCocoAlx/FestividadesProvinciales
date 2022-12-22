@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +40,12 @@ public class FiestaControlador implements WebMvcConfigurer {
 
     @Autowired
     CorreoServicio correoServicio;
+
+    @Autowired
+    UsuarioServicio usuarioServicio;
+
+    @Autowired
+    UsuarioRepositorio usuarioRepositorio;
   
     @GetMapping
     private ModelAndView inicio() {
@@ -65,12 +70,12 @@ public class FiestaControlador implements WebMvcConfigurer {
     }
 
     @PostMapping("/enviarcorreo/{id}")
-    public ModelAndView enviarCorreo(@PathVariable("id") Long id) {
+    public ModelAndView enviarCorreo(@PathVariable("id") Long id, Fiesta fiesta, Usuario usuario) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Detalle de la festividad #" + id);
-        maw.addObject("vista", "fiestas/correo");
-        maw.addObject("exito", "Correo enviado.");        
+        maw.addObject("vista", "fiestas/ver");
+        System.out.println(usuario.getId());
+        System.out.println("Acá quisiera poder ver el correo-e del usuario, ya que lo voy a usar para enviarle un correo");
         return uno(id);
     }
 
