@@ -9,10 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.context.annotation.Bean;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
@@ -43,9 +39,4 @@ public class Usuario {
     @JsonBackReference
     @NotNull
     private Rol rol;
-
-    @Override
-    public String toString(){
-        return this.correo;
-    }
 }

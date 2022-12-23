@@ -13,13 +13,13 @@ public class InicioControlador {
     @Autowired
     FiestaRepositorio fiestaRepositorio;
 
-    @RequestMapping("/inicio")
+    @RequestMapping("/")
     public ModelAndView inicio()
     {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "/inicio");
-        maw.addObject("vista", "inicio/inicio");
+        maw.addObject("titulo", "Inicio");
+        maw.addObject("vista", "fiestas/inicio");
         return maw;
     }
 }
