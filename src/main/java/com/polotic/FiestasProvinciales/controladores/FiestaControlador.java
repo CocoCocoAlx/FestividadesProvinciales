@@ -3,9 +3,12 @@ package com.polotic.FiestasProvinciales.controladores;
 import java.io.File;
 import java.nio.file.Paths;
 
+import javax.persistence.Convert;
 import javax.validation.Valid;
 
+import org.hibernate.query.criteria.internal.expression.function.TrimFunction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +30,8 @@ import com.polotic.FiestasProvinciales.servicios.CorreoServicio;
 import com.polotic.FiestasProvinciales.servicios.FiestaServicio;
 import com.polotic.FiestasProvinciales.servicios.PredioServicio;
 import com.polotic.FiestasProvinciales.servicios.UsuarioServicio;
+
+import lombok.ToString;
 
 @RestController
 @RequestMapping("fiestas")
@@ -70,12 +75,14 @@ public class FiestaControlador implements WebMvcConfigurer {
     }
 
     @PostMapping("/enviarcorreo/{id}")
-    public ModelAndView enviarCorreo(@PathVariable("id") Long id, Fiesta fiesta, Usuario usuario) {
+    public ModelAndView enviarCorreo(@PathVariable("id") Long id, Fiesta fiesta) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("vista", "fiestas/ver");
-        System.out.println(usuario.getId());
-        System.out.println("Acá quisiera poder ver el correo-e del usuario, ya que lo voy a usar para enviarle un correo");
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+        String correo = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(correo);
+        correoServicio.enviarCorreoSimple("correo", "Hola", "Chau");
         return uno(id);
     }
 
