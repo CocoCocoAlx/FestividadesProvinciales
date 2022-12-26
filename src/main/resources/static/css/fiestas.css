@@ -88,7 +88,7 @@ a {
 }
 
 body {
-    background-image: url("/images/fondo3.jpg");
+    background-image: url("/images/imagenesFondos/fondo3.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
