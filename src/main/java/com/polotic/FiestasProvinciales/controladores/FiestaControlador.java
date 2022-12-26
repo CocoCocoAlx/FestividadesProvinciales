@@ -57,6 +57,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.addObject("titulo", "Listado de festividades");
         maw.addObject("vista", "fiestas/inicio");
         maw.addObject("fiestas", fiestaServicio.mostrarTodos());
+        maw.addObject("predios", predioServicio.mostrarTodos());
         return maw;
 
     }
@@ -103,6 +104,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar festividad");
         maw.addObject("vista", "fiestas/agregar");
+        maw.addObject("predios", predioServicio.mostrarTodos());
         return maw;
 
     }
@@ -148,7 +150,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar festividad");
         maw.addObject("vista", "fiestas/editar");
-        maw.addObject("predio", fiestaServicio.mostrarTodos());
+        maw.addObject("predio", predioServicio.mostrarTodos());
 
         if (estaGuardado)
             maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));

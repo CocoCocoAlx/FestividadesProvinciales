@@ -39,7 +39,7 @@ public class PredioControlador implements WebMvcConfigurer {
     private ModelAndView inicio() {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Listado de festividades");
+        maw.addObject("titulo", "Listado de predios");
         maw.addObject("vista", "predios/inicio");
         maw.addObject("predios", predioServicio.mostrarTodos());
         return maw;
@@ -105,7 +105,7 @@ public class PredioControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar festividad");
-        maw.addObject("vista", "predio/editar");
+        maw.addObject("vista", "predios/editar");
         maw.addObject("predio", predioServicio.mostrarTodos());
 
         if (estaGuardado)
@@ -127,7 +127,7 @@ public class PredioControlador implements WebMvcConfigurer {
         Predio registro = predioServicio.seleccionarPorId(id);
         registro.setNombre(predio.getNombre());
         registro.setDescripcion(predio.getDescripcion());
-        registro.setFechaPresentación(predio.getFechaPresentación());
+        registro.setFechaPresentacion(predio.getFechaPresentacion());
         //registro.setFechaFin(predio.getFechaFin());
         registro.setEnlace(predio.getEnlace());
         //registro.setPredio(predio.getPredio());
@@ -150,7 +150,7 @@ public class PredioControlador implements WebMvcConfigurer {
         }
 
         predioServicio.guardar(predio);
-        maw.addObject("correcto", "Festividad editada correctamente.");
+        maw.addObject("exito", "Predio editado correctamente.");
         return maw;
     }
 
@@ -158,7 +158,7 @@ public class PredioControlador implements WebMvcConfigurer {
     private ModelAndView borrar(@PathVariable("id") Long id) {
         predioServicio.borrar(id);
         ModelAndView maw = this.inicio();
-        maw.addObject("correcto", "Festividad eliminada correctamente.");
+        maw.addObject("exito", "Predio agregado correctamente.");
         return maw;
     }
 }

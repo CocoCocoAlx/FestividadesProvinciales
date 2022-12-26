@@ -5,7 +5,7 @@
                 <div class="card-header">
                     Agregar Predio
                 </div>
-                <form class="card-body" th:action="@{/predio/agregar}" th:object="${predio}" method="POST" enctype="multipart/form-data">
+                <form class="card-body" th:action="@{/predios/agregar}" th:object="${predio}" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" th:field="*{nombre}" th:errorClass="'is-invalid'">

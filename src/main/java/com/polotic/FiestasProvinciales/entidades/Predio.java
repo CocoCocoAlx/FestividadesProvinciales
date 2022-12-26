@@ -51,7 +51,7 @@ public class Predio {
   
       @DateTimeFormat(pattern = "yyyy-MM-dd")
       @Temporal(TemporalType.DATE)
-      private Date fechaPresentación;
+      private Date fechaPresentacion;
       
       //@DateTimeFormat(pattern = "yyyy-MM-dd")
       //@Temporal(TemporalType.DATE)

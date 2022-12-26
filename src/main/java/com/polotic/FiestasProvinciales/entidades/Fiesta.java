@@ -34,11 +34,11 @@ public class Fiesta{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
-    
+
     @ManyToOne
     @JsonBackReference
     //@NotNull(message = "Debe elegir un valor")
-     Predio predio;
+    private Predio predio;
 
     @ManyToOne
     @JsonBackReference
@@ -66,10 +66,4 @@ public class Fiesta{
     private String enlace;
 
     private String foto;
-
-    //@ManyToOne
-    //private Predio predio;
-
-    //@ManyToOne
-    //@private Artista artista;
 }

@@ -25,7 +25,7 @@
                     </div>
                     <p>
                         <span class="fw-bold">Predio:</span>
-                        <span th:text="${fiesta.predio}"></span>
+                        <span th:text="${fiesta.predio.nombre}"></span>
                     </p>
                     <form th:action="@{'/fiestas/enviarcorreo/{id}' (id=${fiesta.id})}" th:object="${fiesta}" method="POST">
                         <div class="d-flex justify-content-center">
