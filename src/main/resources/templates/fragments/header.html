@@ -2,7 +2,7 @@
 
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="images/logo.jpg" alt="" width="50px" height="50x">Fiestas Regionales</h3>
+      <img src="/images/logo.jpg" alt="" width="50px" height="50x">Fiestas Regionales</h3>
     </a>
 
     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
@@ -27,11 +27,6 @@
 
             <ul class="dropdown-menu dropdown-menu-dark">
               <li><a class="dropdown-item" href="/fiestas">Misiones</a></li>
-
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-
             </ul>
           </li>
 
@@ -52,29 +47,51 @@
               </a>
             </li>
           </ul>
+          <ul class="nav navbar-nav navbar-center" sec:authorize="hasRole('ROLE_Administrador')">
+            <li class="nav-item dropdown">
+              <a class="img_nav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-lock"></i>
+                <br>
+                <small>EXTRAS</small>
+              </a>
 
-          <div class="mx-5 d-flex">
-            <a href="/login">
-              <button
-                type="button"
-                class="btn btn-outline-danger me-2 link-light border border-2 border-light rounded-0 text-uppercase font-monospace"
-              >
-                Inicia sesión
-              </button>
-            </a>
-            <a href="/registro">
-              <button
-                type="button"
-                class="btn btn-outline-danger me-2 link-light border border-2 border-light rounded-0 text-uppercase font-monospace"
-              >
-                Registrate
-              </button>
-            </a>
-          </div>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="/predios">Predios</a></li>
+                <li><a class="dropdown-item" href="/artistas">Artistas</a></li>
+                <li><a class="dropdown-item" href="/localidades">Localidades</a></li>
 
-        </ul>
+              </ul>
+
+    </div>
+
+    </ul>
+    </li>
+    <div class="mx-5 d-flex">
+      <a href="/login">
+        <button type="button"
+          class="btn btn-outline-danger me-2 link-light border border-2 border-light rounded-0 text-uppercase font-monospace"
+          sec:authorize="isAnonymous()">
+          Inicia sesión
+        </button>
+      </a>
+      <a href="/registro">
+        <button type="button"
+          class="btn btn-outline-danger me-2 link-light border border-2 border-light rounded-0 text-uppercase font-monospace"
+          sec:authorize="isAnonymous()">
+          Registrate
+        </button>
+      </a>
+      <a href="/logout" sec:authorize="isAuthenticated()">
+        <form class="form-inline" th:action="@{/logout}" method="POST">
+          <button
+            class="btn btn-outline-danger me-2 link-light border border-2 border-light rounded-0 text-uppercase font-monospace"
+            aria-current="page" type="submit" onclick="return confirm('¿Seguro de cerrar sesión?')">
+            Cerrar sesión
+          </button>
+        </form>
+      </a>
     </div>
   </div>
 
-  
+
 </nav>
