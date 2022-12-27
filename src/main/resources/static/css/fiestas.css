@@ -7,7 +7,7 @@ nav.navbar ul.nav li {
  
 /* cambiar el color de fondo a la barra */
 nav.navbar {
-    background-color: rgb(195, 195, 204);
+    background-color:rgb(167, 167, 238);
     float: center;
     margin: 0;
     left: 50%;
@@ -52,7 +52,7 @@ img {
 
 .navbar-brand {
     font-size: 35px;
-    margin-left: 5em;
+    margin-left: 3em;
 }
 
 
