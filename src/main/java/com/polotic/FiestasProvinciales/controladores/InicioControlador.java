@@ -19,7 +19,7 @@ public class InicioControlador {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Inicio");
-        maw.addObject("vista", "fiestas/inicio");
+        maw.addObject("vista", "inicio/inicio");
         return maw;
     }
 }
