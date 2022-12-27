@@ -12,7 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.polotic.FiestasProvinciales.servicios.UsuarioServicio;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -22,32 +21,51 @@ public class SeguridadConfig {
     private UsuarioServicio usuarioServicio;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(usuarioServicio).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests()
-                .antMatchers("/css/*", "/js/*", "/fonts/*", "/images/*", "/images/*/*", "/", "/registro")
+                .authorizeHttpRequests()
+                .antMatchers("/css/*", "/js/*", "/fonts/*", "/images/*", "/images/*/*", "/", "/registro", "/fiestas")
                 .permitAll()
-            .and()
-            .authorizeHttpRequests().antMatchers("/fiestas")
+                .and()
+                // .authorizeHttpRequests().antMatchers("/fiestas")
+                // .hasAnyRole("Administrador", "Usuario")
+                // .and()
+                .authorizeHttpRequests().antMatchers("/fiestas/agregar")
+                .hasRole("Administrador")
+                .and()
+                .authorizeHttpRequests().antMatchers("/fiestas/editar/*")
+                .hasRole("Administrador")
+                .and()
+                .authorizeHttpRequests().antMatchers("/artistas")
                 .hasAnyRole("Administrador", "Usuario")
-            .and()
-            .authorizeHttpRequests().antMatchers("/fiestas/crear")
+                .and()
+                .authorizeHttpRequests().antMatchers("/artistas/agregar")
                 .hasRole("Administrador")
-            .and()
-            .authorizeHttpRequests().antMatchers("/fiestas/editar/*")
+                .and()
+                .authorizeHttpRequests().antMatchers("/artistas/editar/*")
                 .hasRole("Administrador")
+                .and()
+                .authorizeHttpRequests().antMatchers("/predios")
+                .hasAnyRole("Administrador", "Usuario")
+                .and()
+                .authorizeHttpRequests().antMatchers("/predios/agregar")
+                .hasRole("Administrador")
+                .and()
+                .authorizeHttpRequests().antMatchers("/predios/editar/*")
+                .hasRole("Administrador")
+                //faltan agregar los formularios de Provincias y Localidades
                 .anyRequest().authenticated()
-            .and()
-            .formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
+                .and()
+                .formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
                 .usernameParameter("correo").passwordParameter("clave")
                 .defaultSuccessUrl("/loginSuccess").permitAll()
-            .and()
-            .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .permitAll();
