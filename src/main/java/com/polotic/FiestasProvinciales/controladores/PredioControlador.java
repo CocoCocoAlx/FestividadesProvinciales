@@ -126,11 +126,9 @@ public class PredioControlador implements WebMvcConfigurer {
 
         Predio registro = predioServicio.seleccionarPorId(id);
         registro.setNombre(predio.getNombre());
-        registro.setDescripcion(predio.getDescripcion());
-        registro.setFechaPresentación(predio.getFechaPresentación());
-        //registro.setFechaFin(predio.getFechaFin());
-        registro.setEnlace(predio.getEnlace());
-        //registro.setPredio(predio.getPredio());
+        registro.setCapacidad(predio.getCapacidad());
+        registro.setUbicacion(predio.getUbicacion());
+
         ModelAndView maw = this.inicio();
 
         if (!archivo.isEmpty()) {
