@@ -12,20 +12,23 @@
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcion" th:field="*{descripcion}" th:errorClass="'is-invalid'" rows="3"></textarea>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+                        <label for="valorEntrada" class="form-label">Valor de Entrada</label>
+                        <input type="time" class="form-control" id="valorEntrada" th:field="*{valorEntrada}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('valorEntrada')}" th:errors="*{valorEntrada}"></div>
                     </div>
+
                     <div class="mb-3">
                         <label for="fechaPresentacion" class="form-label">Fecha de Presentacion</label>
                         <input type="date" class="form-control" id="fechapresentacion" th:field="*{fechaPresentacion}" th:errorClass="'is-invalid'">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaPresenracion')}" th:errors="*{fechaPresentacion}"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="hora" class="form-label">Hora</label>
-                        <input type="time" class="form-control" id="hora" th:field="*{hora}" th:errorClass="'is-invalid'">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('hora')}" th:errors="*{hora}"></div>
+                        <label for="horaPresentacion" class="form-label">Hora de Presentacion</label>
+                        <textarea class="form-control" id="horaPresentacion" th:field="*{horaPresentacion}" th:errorClass="'is-invalid'" rows="3"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('horaPresentacion')}" th:errors="*{horaPresentacion}"></div>
                     </div>
+                    
+                    
                     <div class="mb-3">
                         <label for="enlace" class="form-label">Enlace a página web / Página en RRSS</label>
                         <input type="text" class="form-control" id="enlace" th:field="*{enlace}" th:errorClass="'is-invalid'">

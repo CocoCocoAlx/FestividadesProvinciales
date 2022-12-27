@@ -57,6 +57,9 @@ public class Artista {
       
       
       private String foto;
+      
+
+      private Double valorEntrada;
   
       
 

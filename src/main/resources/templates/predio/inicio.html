@@ -22,9 +22,8 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Fechas de Presentacion</th>
-                    <th>Enlace a web / FB / IG</th>
+                    <th>Capacidad</th>
+                    <th>Ubicacion</th>
                     <th>Fotos</th>
                     
                 </tr>
@@ -32,9 +31,9 @@
             <tbody>
                 <tr th:each="f : ${predio}">
                     <td th:text="${f.nombre}"></td>
-                    <td th:text="${f.descripcion}"></td>
-                    <td th:text="'Del '+${#dates.format(f.fechaPresentacion, 'dd/MM/yyyy')}+' al '+${#dates.format(f.fechaPresentacion, 'dd/MM/yyyy')}"></td>
-                    <td style="text-align: center;"> <a class="fa fa-external-link" th:href="@{${f.enlace}}"></a></td>
+                    <td th:text="${f.capacidad}"></td>
+                    <td th:text="${f.ubicacion}"></td>
+                    <!--<td style="text-align: center;"> <a class="fa fa-external-link" th:href="@{${f.enlace}}"></a></td>-->
                     <td style="text-align: center;"><img th:src="${'/images/predio/' + f.foto}" height="150px"></td>
                     <td th:text="${f.predio}"></td>
                     <td>
