@@ -43,6 +43,11 @@ public class Fiesta{
     @ManyToOne
     @JsonBackReference
     //@NotNull(message = "Debe elegir un valor")
+    private Localidad localidad;
+
+    @ManyToOne
+    @JsonBackReference
+    //@NotNull(message = "Debe elegir un valor")
     private Artista artista;
 
     @NotBlank(message = "Campo obligatorio")

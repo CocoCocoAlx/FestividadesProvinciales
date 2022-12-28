@@ -13,12 +13,12 @@ public class InicioControlador {
     @Autowired
     FiestaRepositorio fiestaRepositorio;
 
-    @RequestMapping("/inicio")
+    @RequestMapping("/")
     public ModelAndView inicio()
     {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "inicio");
+        maw.addObject("titulo", "Fiestas Provinciales - Inicio");
         maw.addObject("vista", "inicio/inicio");
         return maw;
     }

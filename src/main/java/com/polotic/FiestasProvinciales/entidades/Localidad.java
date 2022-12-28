@@ -1,16 +1,21 @@
 package com.polotic.FiestasProvinciales.entidades;
 
 import lombok.*;
+
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-@Table(name="localidades")
+@Table(name="localidad")
 
 public class Localidad {
     @Id
@@ -30,5 +35,8 @@ public class Localidad {
     @ManyToOne
     private Provincia provincias;
 
+    @OneToMany(mappedBy = "localidad")
+    @JsonManagedReference
+    private List<Fiesta> fiesta;
 
 }

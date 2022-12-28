@@ -12,8 +12,7 @@
     </p>
     <p>
         Te enviamos los datos de la <b th:text="${fiesta}">Fiesta</b> que se realizará entre los días
-        <span th:text="${#dates.format(fechaInicio, 'dd/MM/yyyy')}">FechaInicio</span> y <span
-            th:text="${#dates.format(fechaFin, 'dd/MM/yyyy')}">FechaFin</span>.
+        <span style="font-weight:bold" th:text="${#dates.format(fechaInicio, 'dd/MM/yyyy')}">FechaInicio</span> y <span style="font-weight:bold" th:text="${#dates.format(fechaFin, 'dd/MM/yyyy')}">FechaFin</span> en <span style="font-weight:bold" th:text="${localidad}">Localidad</span>, a unos <span style="font-weight:bold" th:text="${distancia}">kilómetros</span> kilómetros desde Posadas.
     </p>
     <p>La misma se realizará en el predio <b th:text="${predio}">Predio</b> , ubicado en <b th:text="${predioUbicacion}">ubicación.</b></p>
     <p>
