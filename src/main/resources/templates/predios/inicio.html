@@ -12,8 +12,8 @@
         </div>
 
         <div class="row mb-5">
-            <div class="col h2">Listado de Predio</div>
-            <a href="/predios/agregar" class="col-auto btn btn-lg btn-success">
+            <div class="col h2">Listado de Predios</div>
+            <a sec:authorize="hasRole('ROLE_Administrador')" href="/predios/agregar" class="col-auto btn btn-lg btn-success">
                 <i class="fa-solid fa-plus"></i>
             </a>
         </div>
@@ -22,31 +22,22 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Fechas de Presentacion</th>
-                    <th>Enlace a web / FB / IG</th>
-                    <th>Fotos</th>
-                    
+                    <th>Capacidad</th>
+                    <th>Ubicación</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="p : ${predios}">
                     <td th:text="${p.nombre}"></td>
-                    <td th:text="${p.descripcion}"></td>
-                    <td th:text="'Del '+${#dates.format(p.fechaPresentacion, 'dd/MM/yyyy')}+' al '+${#dates.format(p.fechaPresentacion, 'dd/MM/yyyy')}"></td>
-                    <td style="text-align: center;"> <a class="fa fa-external-link" th:href="@{${p.enlace}}"></a></td>
-                    <td style="text-align: center;"><img th:src="${'/images/predio/' + p.foto}" height="150px"></td>
-                    <td th:text="${p.nombre}"></td>
+                    <td th:text="${p.capacidad}"></td>
+                    <td th:text="${p.ubicacion}"></td>
                     <td>
-                        <a class="btn btn-primary" th:href="@{'/predio/{id}' (id=${p.id})}">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-
-                        <a class="btn btn-secondary" th:href="@{'/predios/editar/{id}' (id=${p.id})}">
+                        <a sec:authorize="hasRole('ROLE_Administrador')" class="btn btn-secondary" th:href="@{'/predios/editar/{id}' (id=${p.id})}">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
 
-                        <form class="d-inline" th:action="@{'/predios/{id}' (id=${p.id})}" th:method="DELETE">
+                        <form sec:authorize="hasRole('ROLE_Administrador')" class="d-inline" th:action="@{'/predios/{id}' (id=${p.id})}" th:method="DELETE">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro de eliminar?')">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
@@ -60,6 +51,6 @@
 
 <script th:fragment="script">
     $(document).ready(function() {
-        $('#fiestas').DataTable();
+        $('#predio').DataTable();
     } );
 </script>
