@@ -1,6 +1,5 @@
 package com.polotic.FiestasProvinciales.entidades;
 
-
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -27,7 +26,7 @@ public class Localidad {
     private String informacion;
 
     private int distancia;
-
+    
     @ManyToOne
     private Provincia provincias;
 
