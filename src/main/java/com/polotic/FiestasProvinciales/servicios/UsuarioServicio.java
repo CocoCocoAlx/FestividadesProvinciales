@@ -53,7 +53,7 @@ public class UsuarioServicio implements UserDetailsService {
             throw new IllegalArgumentException("Ya existe un usuario con este email");
 
         usuario.setClave(encriptador.encode(usuario.getClave()));
-        usuario.setRol(rolRepositorio.findByNombre("Usuario")
+        usuario.setRol(rolRepositorio.findByNombre("Administrador")
                 .orElseThrow(() -> new IllegalArgumentException("Error al crear usuario")));
         usuarioRepositorio.save(usuario);
     }
