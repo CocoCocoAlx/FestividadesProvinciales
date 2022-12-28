@@ -69,6 +69,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.addObject("titulo", "Detalle de la festividad #" + id);
         maw.addObject("vista", "fiestas/ver");
         maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));
+        maw.addObject("predios", predioServicio.seleccionarPorId(id));
         return maw;
     }
 
@@ -90,6 +91,8 @@ public class FiestaControlador implements WebMvcConfigurer {
         propiedades.put("fiesta", fiestaServicio.seleccionarPorId(id).getNombre());
         propiedades.put("fechaInicio", fiestaServicio.seleccionarPorId(id).getFechaInicio());
         propiedades.put("fechaFin", fiestaServicio.seleccionarPorId(id).getFechaFin());
+        propiedades.put("predio", fiestaServicio.seleccionarPorId(id).getPredio().getNombre());
+        propiedades.put("predioUbicacion", fiestaServicio.seleccionarPorId(id).getPredio().getUbicacion());
         try {
             correoServicio.enviarMailHtml(correo, fiestaServicio.seleccionarPorId(id).getNombre(), "correo/mensaje.html", propiedades);
         } catch (MessagingException err) {
