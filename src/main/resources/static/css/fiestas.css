@@ -109,7 +109,9 @@ img {
  }
  
 
-
+.row{
+    display: flex !important; /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
+}
 
 
 /* ---------------------------------------------------
