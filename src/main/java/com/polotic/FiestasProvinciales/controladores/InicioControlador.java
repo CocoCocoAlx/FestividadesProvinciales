@@ -13,7 +13,7 @@ public class InicioControlador {
     @Autowired
     FiestaRepositorio fiestaRepositorio;
 
-    @RequestMapping("/")
+    @RequestMapping("/inicio")
     public ModelAndView inicio()
     {
         ModelAndView maw = new ModelAndView();

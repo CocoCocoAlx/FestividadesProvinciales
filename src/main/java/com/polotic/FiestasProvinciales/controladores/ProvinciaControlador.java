@@ -19,7 +19,7 @@ import com.polotic.FiestasProvinciales.entidades.Provincia;
 import com.polotic.FiestasProvinciales.servicios.ProvinciaServicio;
 
 @RestController
-@RequestMapping("provincias")
+@RequestMapping("/provincias")
 
 public class ProvinciaControlador implements WebMvcConfigurer {
 
@@ -33,7 +33,7 @@ public class ProvinciaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Listado de provincias");
         maw.addObject("vista", "provincias/inicio");
-        maw.addObject("provincia", provinciaServicio.mostrarTodos());
+        maw.addObject("provincias", provinciaServicio.mostrarTodos());
         
         return maw;
 

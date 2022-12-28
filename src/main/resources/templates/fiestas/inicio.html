@@ -13,7 +13,7 @@
 
         <div class="row mb-5">
             <div class="col h2">Listado de Festividades</div>
-            <a href="/fiestas/agregar" class="col-auto btn btn-lg btn-success">
+            <a sec:authorize="hasRole('ROLE_Administrador')" href="/fiestas/agregar" class="col-auto btn btn-lg btn-success">
                 <i class="fa-solid fa-plus"></i>
             </a>
         </div>
@@ -22,31 +22,28 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Descripción</th>
                     <th>Fechas de realización</th>
                     <th>Enlace a web / FB / IG</th>
                     <th>Fotos</th>
-                    <th>Predio</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="f : ${fiestas}">
                     <td th:text="${f.nombre}"></td>
-                    <td th:text="${f.descripcion}"></td>
                     <td th:text="'Del '+${#dates.format(f.fechaInicio, 'dd/MM/yyyy')}+' al '+${#dates.format(f.fechaFin, 'dd/MM/yyyy')}"></td>
                     <td style="text-align: center;"> <a class="fa fa-external-link" th:href="@{${f.enlace}}"></a></td>
-                    <td style="text-align: center;"><img th:src="${'/images/fiestas/' + f.foto}" height="150px"></td>
-                    <td th:text="${f.predio}"></td>
+                    <td style="text-align: center;"><img th:src="${'/images/fiestas/' + f.foto}" style="display:block;" width="60%" height="60%" ></td>
                     <td>
-                        <a class="btn btn-primary" th:href="@{'/fiestas/{id}' (id=${f.id})}">
+                        <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_Administrador','ROLE_Usuario')" th:href="@{'/fiestas/{id}' (id=${f.id})}">
                             <i class="fa-solid fa-eye"></i>
                         </a>
 
-                        <a class="btn btn-secondary" th:href="@{'/fiestas/editar/{id}' (id=${f.id})}">
+                        <a sec:authorize="hasRole('ROLE_Administrador')" class="btn btn-secondary" th:href="@{'/fiestas/editar/{id}' (id=${f.id})}">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
 
-                        <form class="d-inline" th:action="@{'/fiestas/{id}' (id=${f.id})}" th:method="DELETE">
+                        <form sec:authorize="hasRole('ROLE_Administrador')" class="d-inline" th:action="@{'/fiestas/{id}' (id=${f.id})}" th:method="DELETE">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro de eliminar?')">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>

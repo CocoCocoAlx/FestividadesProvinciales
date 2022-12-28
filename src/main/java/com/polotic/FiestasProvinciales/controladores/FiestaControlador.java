@@ -2,10 +2,14 @@ package com.polotic.FiestasProvinciales.controladores;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +25,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.polotic.FiestasProvinciales.entidades.Fiesta;
+import com.polotic.FiestasProvinciales.repositorios.UsuarioRepositorio;
+import com.polotic.FiestasProvinciales.servicios.CorreoServicio;
 import com.polotic.FiestasProvinciales.servicios.FiestaServicio;
 import com.polotic.FiestasProvinciales.servicios.PredioServicio;
+import com.polotic.FiestasProvinciales.servicios.UsuarioServicio;
 
 @RestController
 @RequestMapping("fiestas")
@@ -34,6 +41,15 @@ public class FiestaControlador implements WebMvcConfigurer {
     @Autowired
     PredioServicio predioServicio;
 
+    @Autowired
+    CorreoServicio correoServicio;
+
+    @Autowired
+    UsuarioServicio usuarioServicio;
+
+    @Autowired
+    UsuarioRepositorio usuarioRepositorio;
+  
     @GetMapping
     private ModelAndView inicio() {
         ModelAndView maw = new ModelAndView();
@@ -41,6 +57,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.addObject("titulo", "Listado de festividades");
         maw.addObject("vista", "fiestas/inicio");
         maw.addObject("fiestas", fiestaServicio.mostrarTodos());
+        maw.addObject("predios", predioServicio.mostrarTodos());
         return maw;
 
     }
@@ -52,7 +69,36 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.addObject("titulo", "Detalle de la festividad #" + id);
         maw.addObject("vista", "fiestas/ver");
         maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));
+        maw.addObject("predios", predioServicio.seleccionarPorId(id));
         return maw;
+    }
+
+    @PostMapping("/enviarcorreo/{id}")
+    public ModelAndView enviarCorreo(@PathVariable("id") Long id, Fiesta fiesta) {
+        ModelAndView maw = new ModelAndView();
+        maw.addObject("titulo", "Detalle de la festividad #" + id);
+        maw.addObject("vista", "fiestas/ver");
+        maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));        
+        String correo = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        // Otros métodos para enviar correos
+        // correoServicio.enviarCorreoSimple(correo, "Información sobre el evento "+fiestaServicio.seleccionarPorId(id).getNombre(), "Aquí tenés toda la información de la festividad "+fiestaServicio.seleccionarPorId(id).getDescripcion());
+        
+        // String[] adjuntos={"classpath:static/images/fiestas/32.jpeg"};
+        // correoServicio.enviarCorreoConAdjunto(correo, "Información sobre el evento "+fiestaServicio.seleccionarPorId(id).getNombre(), "Aquí tenés toda la información de la festividad "+fiestaServicio.seleccionarPorId(id).getDescripcion(), adjuntos);
+
+        Map<String, Object> propiedades = new HashMap<>();
+        propiedades.put("fiesta", fiestaServicio.seleccionarPorId(id).getNombre());
+        propiedades.put("fechaInicio", fiestaServicio.seleccionarPorId(id).getFechaInicio());
+        propiedades.put("fechaFin", fiestaServicio.seleccionarPorId(id).getFechaFin());
+        propiedades.put("predio", fiestaServicio.seleccionarPorId(id).getPredio().getNombre());
+        propiedades.put("predioUbicacion", fiestaServicio.seleccionarPorId(id).getPredio().getUbicacion());
+        try {
+            correoServicio.enviarMailHtml(correo, fiestaServicio.seleccionarPorId(id).getNombre(), "correo/mensaje.html", propiedades);
+        } catch (MessagingException err) {
+            err.printStackTrace();
+        }
+        return uno(id);
     }
 
     @GetMapping("/agregar")
@@ -61,6 +107,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar festividad");
         maw.addObject("vista", "fiestas/agregar");
+        maw.addObject("predios", predioServicio.mostrarTodos());
         return maw;
 
     }
@@ -106,7 +153,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar festividad");
         maw.addObject("vista", "fiestas/editar");
-        maw.addObject("predio", fiestaServicio.mostrarTodos());
+        maw.addObject("predio", predioServicio.mostrarTodos());
 
         if (estaGuardado)
             maw.addObject("fiesta", fiestaServicio.seleccionarPorId(id));
@@ -150,7 +197,7 @@ public class FiestaControlador implements WebMvcConfigurer {
         }
 
         fiestaServicio.guardar(fiesta);
-        maw.addObject("correcto", "Festividad editada correctamente.");
+        maw.addObject("exito", "Festividad editada correctamente.");
         return maw;
     }
 
@@ -158,7 +205,7 @@ public class FiestaControlador implements WebMvcConfigurer {
     private ModelAndView borrar(@PathVariable("id") Long id) {
         fiestaServicio.borrar(id);
         ModelAndView maw = this.inicio();
-        maw.addObject("correcto", "Festividad eliminada correctamente.");
+        maw.addObject("exito", "Festividad eliminada correctamente.");
         return maw;
     }
 }

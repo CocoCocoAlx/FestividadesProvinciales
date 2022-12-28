@@ -1,18 +1,95 @@
 /* cambiar tipo de letra */
 nav.navbar ul.nav li {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: larger;
-    font-weight: bold;
+   
     
 }
  
 /* cambiar el color de fondo a la barra */
 nav.navbar {
-    background-color: rgb(124, 124, 231);
+    background-color:rgb(167, 167, 238);
+    float: center;
+    margin: 0;
+    left: 50%;
+    transform: translatex(-50%);
+    position: relative;
+    z-index: 1;
+    
+    
+}
+
+nav ul li { 
+    float: center; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 20px;
+  
+    margin-left: 0.6em;
+    margin-right: 0.6em;
+ 
+    
+}
+
+img.img_nav {
+    max-width: 20vw;
+    width: 40px;
+    display: inline-block;
+    align-items: center;
+    
+}
+img {
+    vertical-align: middle;
+  
+    
+}
+
+
+.navbar {
+    
+    min-height: 30px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    
+}
+
+.navbar-brand {
+    font-size: 35px;
+    margin-left: 3em;
+}
+
+
+
+.navbar-fixed-top {
+    background-color: #cacac7!important;
+}
+.navbar-fixed-bottom .navbar-nav>li>a, .navbar-fixed-top-2 .navbar-nav>li>a {
+    color: #1b042918!important;
+}
+.navbar-nav>li>a {
+    padding: 15px 20px;
+    line-height: 20px;
+}
+
+
+.nav {
+    padding-left: 0;
+    margin-bottom: -0.5em;
+    list-style: none;
+}
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+
+
+a {
+    color: #1f2020;
+    text-decoration: none;
+    font-size:larger;
 }
 
 body {
-    background-image: url("/images/fondo.jpg");
+    background-image: url("/images/imagenesFondos/fondo3.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -28,8 +105,15 @@ img {
     height:auto;
     max-height:100%;
     align-items: center;
+    margin-right: 0.5em;
  }
  
+
+.row{
+    display: flex !important; /* ETIQUETA QUE POSICIONA UNO AL LADO DEL OTRO */
+}
+
+
 /* ---------------------------------------------------
                 CONTENT STYLE
 --------------------------------------------------- */
@@ -37,6 +121,8 @@ img {
 #content {
     width: 100%;
     min-height: 100vh;
+   
+   
 }
 
 @media (min-width: 576px) {

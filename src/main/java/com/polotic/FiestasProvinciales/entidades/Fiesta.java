@@ -10,9 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +35,16 @@ public class Fiesta{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
+    @ManyToOne
+    @JsonBackReference
+    //@NotNull(message = "Debe elegir un valor")
+    private Predio predio;
+
+    @ManyToOne
+    @JsonBackReference
+    //@NotNull(message = "Debe elegir un valor")
+    private Artista artista;
+
     @NotBlank(message = "Campo obligatorio")
     @Size(max = 250, message= "Nombre demasiado largo")
     private String nombre;
@@ -43,17 +55,15 @@ public class Fiesta{
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
+    @Future(message = "La fecha debe ser posterior a la actual")
     private Date fechaInicio;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
+    @Future(message = "La fecha debe ser posterior a la actual")
     private Date fechaFin;
 
     private String enlace;
 
     private String foto;
-
-    @ManyToOne
-    private Predio predio;
-
 }

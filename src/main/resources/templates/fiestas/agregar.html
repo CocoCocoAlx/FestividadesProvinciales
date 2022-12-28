@@ -39,7 +39,7 @@
                         <label for="predio" class="form-label">Predio donde se realiza</label>
                         <select id="predio" th:field="*{predio}" class="select2 form-select" th:errorClass="'is-invalid'">
                             <option selected value=""></option>
-                            <option th:each="p : ${predio}" th:value="${p.id}" th:text="${p.nombre}"></option>
+                            <option th:each="p : ${predios}" th:value="${p.id}" th:text="${p.nombre}"></option>
                         </select>
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('predio')}" th:errors="*{predio}"></div>
                     </div>
