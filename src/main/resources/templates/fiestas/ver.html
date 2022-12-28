@@ -28,6 +28,9 @@
                         <span th:text="${fiesta.predio.nombre}"></span>
                     </p>
                     <p>
+                        <span class="fw-bold">Localidad: </span><span class="fw-bold" th:text="${fiesta.localidad.nombre+' (a '}">Localidad:</span><span th:text="${fiesta.localidad.distancia+' km aprox. desde Posadas)'}">Distancia</span>
+                    </p>
+                    <p>
                     <form th:action="@{'/fiestas/enviarcorreo/{id}' (id=${fiesta.id})}" th:object="${fiesta}"
                         method="POST">
                         <div class="d-flex justify-content-center">

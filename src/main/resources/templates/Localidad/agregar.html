@@ -5,20 +5,20 @@
                 <div class="card-header">
                     Agregar Localidad
                 </div>
-                <form class="card-body" th:action="@{/localidad/agregar}" th:object="${localidad}" method="POST" enctype="multipart/form-data">
+                <form class="card-body" th:action="@{/localidades/agregar}" th:object="${localidad}" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" th:field="*{nombre}" th:errorClass="'is-invalid'">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="información" class="form-label">Información</label>
-                        <textarea class="form-control" id="información" th:field="*{información}" th:errorClass="'is-invalid'" rows="3"></textarea>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('información')}" th:errors="*{información}"></div>
+                        <label for="informacion" class="form-label">Información</label>
+                        <textarea class="form-control" id="informacion" th:field="*{informacion}" th:errorClass="'is-invalid'" rows="3"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('informacion')}" th:errors="*{informacion}"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="distancia" class="form-label">Información</label>
-                        <textarea class="form-control" id="distancia" th:field="*{distancia}" th:errorClass="'is-invalid'" rows="3"></textarea>
+                        <label for="distancia" class="form-label">Distancia (desde Posadas)</label>
+                        <input type="number" class="form-control" id="distancia" th:field="*{distancia}" th:errorClass="'is-invalid'">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('distancia')}" th:errors="*{distancia}"></div>
                     </div>
                     

@@ -32,7 +32,7 @@ public class LocalidadControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Listado de localidades");
-        maw.addObject("vista", "localidad/inicio");
+        maw.addObject("vista", "Localidad/inicio");
         maw.addObject("localidad", localidadServicio.mostrarTodos());
         return maw;
 
@@ -44,7 +44,7 @@ public class LocalidadControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar localidad");
-        maw.addObject("vista", "localidad/agregar");
+        maw.addObject("vista", "Localidad/agregar");
         maw.addObject("provincia", localidadServicio.mostrarTodos());
         return maw;
 
@@ -72,7 +72,7 @@ public class LocalidadControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar localidad");
-        maw.addObject("vista", "localidad/editar");
+        maw.addObject("vista", "Localidad/editar");
         
 
         if (estaGuardado)
@@ -94,6 +94,7 @@ public class LocalidadControlador implements WebMvcConfigurer {
         Localidad registro = localidadServicio.seleccionarPorId(id);
         registro.setNombre(localidad.getNombre());
         registro.setInformacion(localidad.getInformacion());
+        registro.setDistancia(localidad.getDistancia());
         ModelAndView maw = this.inicio();
         
         

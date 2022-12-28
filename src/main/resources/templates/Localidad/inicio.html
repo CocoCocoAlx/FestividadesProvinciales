@@ -12,8 +12,8 @@
         </div>
 
         <div class="row mb-5">
-            <div class="col h2">Localidad</div>
-            <a href="/localidad/agregar" class="col-auto btn btn-lg btn-success">
+            <div class="col h2">Listado de Localidades</div>
+            <a href="/localidades/agregar" class="col-auto btn btn-lg btn-success">
                 <i class="fa-solid fa-plus"></i>
             </a>
         </div>
@@ -24,23 +24,20 @@
                     <th>Nombre</th>
                     <th>Información</th>
                     <th>Distancia</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="f : ${localidad}">
                     <td th:text="${f.nombre}"></td>
-                    <td th:text="${f.información}"></td>
+                    <td th:text="${f.informacion}"></td>
                     <td th:text="${f.distancia}"></td>
                  <td>
-                        <a class="btn btn-primary" th:href="@{'/localidad/{id}' (id=${f.id})}">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-
-                        <a class="btn btn-secondary" th:href="@{'/localidad/editar/{id}' (id=${f.id})}">
+                        <a class="btn btn-secondary" th:href="@{'/localidades/editar/{id}' (id=${f.id})}">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
 
-                        <form class="d-inline" th:action="@{'/localidad/{id}' (id=${f.id})}" th:method="DELETE">
+                        <form class="d-inline" th:action="@{'/localidades/{id}' (id=${f.id})}" th:method="DELETE">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro de eliminar?')">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
