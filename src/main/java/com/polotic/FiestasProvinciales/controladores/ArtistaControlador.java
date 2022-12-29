@@ -40,7 +40,7 @@ public class ArtistaControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Listado de festividades");
-        maw.addObject("vista", "artistas/inicio");
+        maw.addObject("vista", "artista/inicio");
         maw.addObject("artistas", artistaServicio.mostrarTodos());
         return maw;
 
@@ -50,7 +50,7 @@ public class ArtistaControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Detalle de la festividad #" + id);
-        maw.addObject("vista", "artistas/ver");
+        maw.addObject("vista", "artista/ver");
         maw.addObject("artistas", artistaServicio.seleccionarPorId(id));
         return maw;
     }
@@ -60,7 +60,7 @@ public class ArtistaControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Agregar festividad");
-        maw.addObject("vista", "artistas/agregar");
+        maw.addObject("vista", "artista/agregar");
         return maw;
 
     }
@@ -105,7 +105,7 @@ public class ArtistaControlador implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Editar festividad");
-        maw.addObject("vista", "artistas/editar");
+        maw.addObject("vista", "artista/editar");
         maw.addObject("artistas", artistaServicio.mostrarTodos());
 
         if (estaGuardado)
