@@ -28,7 +28,7 @@ public class PredioControlador implements WebMvcConfigurer {
     {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Listado de países");
+        maw.addObject("titulo", "Listado de predios");
         maw.addObject("vista", "predios/inicio");
         maw.addObject("predios", predioServicio.mostrarTodos());
         return maw;

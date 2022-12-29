@@ -26,29 +26,28 @@
                     <th>Fechas de Presentacion</th>
                     <th>Hora de Presentacion</th>
                     <th>Enlace a web / FB / IG</th>
-                    <th>Fotos</th>
-                    
+                    <th>Foto</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="f : ${artista}">
-                    <td th:text="${f.nombre}"></td>
-                    <td th:text="${f.descripcion}"></td>
-                    <td th:text="${f.horaPresentacion}"></td>
-                    <td th:text="'Del '+${#dates.format(f.fechaPresentacion, 'dd/MM/yyyy')}+' al '+${#dates.format(f.fechaPresentacion, 'dd/MM/yyyy')}"></td>
-                    <td style="text-align: center;"> <a class="fa fa-external-link" th:href="@{${f.enlace}}"></a></td>
-                    <td style="text-align: center;"><img th:src="${'/images/artista/' + f.foto}" height="150px"></td>
-                    <td th:text="${f.artista}"></td>
+                <tr th:each="a : ${artista}">
+                    <td th:text="${a.nombre}"></td>
+                    <td th:text="${a.descripcion}"></td>
+                    <td th:text="'Del '+${#dates.format(a.fechaPresentacion, 'dd/MM/yyyy')}+' al '+${#dates.format(a.fechaPresentacion, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${a.horaPresentacion}"></td>
+                    <td style="text-align: center;"> <a class="fa fa-external-link" th:href="@{${a.enlace}}"></a></td>
+                    <td style="text-align: center;"><img th:src="${'/images/artista/' + a.foto}" height="150px"></td>
                     <td>
-                        <a class="btn btn-primary" th:href="@{'/artista/{id}' (id=${f.id})}">
+                        <a class="btn btn-primary" th:href="@{'/artista/{id}' (id=${a.id})}">
                             <i class="fa-solid fa-eye"></i>
                         </a>
 
-                        <a class="btn btn-secondary" th:href="@{'/artista/editar/{id}' (id=${f.id})}">
+                        <a class="btn btn-secondary" th:href="@{'/artista/editar/{id}' (id=${a.id})}">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
 
-                        <form class="d-inline" th:action="@{'/artista/{id}' (id=${f.id})}" th:method="DELETE">
+                        <form class="d-inline" th:action="@{'/artista/{id}' (id=${a.id})}" th:method="DELETE">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro de eliminar?')">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
@@ -62,6 +61,6 @@
 
 <script th:fragment="script">
     $(document).ready(function() {
-        $('#fiestas').DataTable();
+        $('#artista').DataTable();
     } );
 </script>
